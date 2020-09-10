@@ -3,16 +3,16 @@
 
 #MySQL Database Information:
 
-	database_name='plantnanny'
-	host='localhost'
-	username='mainuser'
-	password='mainuser'
+database_name='plantnanny'
+host='localhost'
+username='mainuser'
+password='mainuser'
 
-	phpmyadmin_password='Balk45610'
+phpmyadmin_password='Balk45610'
 
 
 #Instrument Settings
 
-    #I2C Instruments
+#I2C Instruments
 
-    addr_sensor_soil=const(0X36)
+addr_sensor_soil=0X36
