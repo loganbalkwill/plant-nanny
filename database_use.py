@@ -7,7 +7,6 @@ import settings as s
 
 """ TODO
         -Logging database actions
-        -
 """
 
 try:
@@ -22,7 +21,7 @@ except:
     print("FAILED to connect to database '%s'" % s.database_name) 
 
 
-def write_to_db(db, table, write_info):
+def write_to_db(table, write_info,db=plant_db):
     #Write data to the database table
     
     #build SQL command string
@@ -35,7 +34,7 @@ def write_to_db(db, table, write_info):
         
         db.commit()
         
-        print(cursor.rowcount, "record inserted")
+        print(cursor.rowcount, "record inserted to %s table" % table)
     
     except:
         print("Failed to write to database")
@@ -52,5 +51,5 @@ def build_SQL_insert(table_name):
 
 
 if __name__=="__main__":
-    print("Attempting DB Connection")
+    print("Attempting to write to DB")
     write_to_db(db=plant_db,table='soilsensor',write_info=['2020-08-31','testPlant',20,390])
