@@ -4,7 +4,8 @@
 #MySQL Database Information:
 
 	database_name='plantnanny'
-	username="'mainuser'@'localhost'"
+	host='localhost'
+	username='mainuser'
 	password='mainuser'
 
 	phpmyadmin_password='Balk45610'
