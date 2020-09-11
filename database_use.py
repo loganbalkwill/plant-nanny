@@ -49,20 +49,41 @@ def build_SQL_insert(table_name):
     else:
         return ''
 
-def get_sensor_list(additional_filters):
+def get_sensor_list(additional_sql):
     #returns list of active sensors
     
     #build SQL query string
-    sql= "SELECT * FROM sensors WHERE active=1"
+    sql= "SELECT * FROM sensors"
     
-    if len(additional_filters)>1:
-        sql=sql + " AND " + additional_filters 
+    if len(additional_sql)>1:
+        sql=sql + " WHERE " + additional_sql 
+        
+    #execute query
+    mycursor=plant_db.cursor()
+    mycursor.execute(sql)
+    
+    mycursor.close()
+    
+    sensor_list=mycursor.fetchall()
+    return sensor_list
+
+def get_sensor_frequencies(additional_sql):
+    #returns list of sensor read frequencies
+    
+    #build SQL query string
+    sql= "SELECT read_frequency_min FROM sensors"
+    
+    if len(additional_sql)>1:
+        sql=sql + " WHERE " + additional_sql 
         
     #execute query
     mycursor=plant_db.cursor()
     mycursor.execute(sql)
     
     sensor_list=mycursor.fetchall()
+        
+    mycursor.close()
+    
     return sensor_list
     
 if __name__=="__main__":
