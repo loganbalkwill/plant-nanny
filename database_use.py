@@ -62,9 +62,9 @@ def get_sensor_list(additional_sql):
     mycursor=plant_db.cursor()
     mycursor.execute(sql)
     
+    sensor_list=mycursor.fetchall()
     mycursor.close()
     
-    sensor_list=mycursor.fetchall()
     return sensor_list
 
 def get_sensor_frequencies(additional_sql):

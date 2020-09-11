@@ -15,6 +15,7 @@ __email__     = "lgb0020@gmail.com"
 import time
 import math
 import settings as s
+import supporting_functions as funk
 import soilsensor
 import database_use as db
 
@@ -38,13 +39,15 @@ GENERAL ALGORITHM:
 """
 
 
+
 #########################
 ### STARTUP PROCEDURE ###
 #########################
 
 #Check Peripherals
     #Build list of available sensors
-    sensors=db.get_sensors()
+sensors=db.get_sensor_list(additional_sql="active=1")
+sensor_freq=db.get_sensor_frequencies(additional_sql="active=1")
 
 #Check Database Connection
     #Check for queued logs
@@ -52,14 +55,17 @@ GENERAL ALGORITHM:
 #Check Emailing Functionality
 
 #Calculate looping frequency
-loop_freq=get_loop_frequency(sensors)
+loop_freq=funk.get_loop_frequency(sensor_freq)
 
 #########################
 ####### MAIN LOOP #######
 #########################
 
+if __name__=='__main__':
+    main()
+
 def main():
-    while true:
+    while 1==1:
         
         #Check sensors
         for s in sensors:
@@ -73,30 +79,6 @@ def main():
         
         time.sleep(60*loop_freq)
         
-def get_loop_frequency(numlist):
-    #returns the frequency of looping in the main procedure
-    
-    #default returns 1 minute
-    GCD=1
-    
-    #if any of the numbers provided are less than 1 minute (non-negative),
-    #a greatest common divisor (GCD) is calculated
-    
-    for num in numlist:
-        if num<0: 
-            print("ERROR: negative number provided for loop frequency; please correct")
-            break
-        elif num>1 and num!=math.ceil(num):
-            print("WARNING: partial minute provided for loop frequency (%s mins); number will be rounded to %s mins for calculation" % (num, math.floor(num)))
-            
-            num=math.floor(num)
-        
-    if min(numlist)<1 and min(numlist)>0:
-        #need to calculate new GCM
-        GCD=(math.gcd(math.floor(num*60),60))
-    
-    return GCD
 
-        
-if __name__=='__main__':
-    main()
+
+
