@@ -49,7 +49,22 @@ def build_SQL_insert(table_name):
     else:
         return ''
 
-
+def get_sensor_list(additional_filters):
+    #returns list of active sensors
+    
+    #build SQL query string
+    sql= "SELECT * FROM sensors WHERE active=1"
+    
+    if len(additional_filters)>1:
+        sql=sql + " AND " + additional_filters 
+        
+    #execute query
+    mycursor=plant_db.cursor()
+    mycursor.execute(sql)
+    
+    sensor_list=mycursor.fetchall()
+    return sensor_list
+    
 if __name__=="__main__":
     print("Attempting to write to DB")
     write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','testPlant',20,390])
