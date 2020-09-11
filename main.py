@@ -57,13 +57,10 @@ sensor_freq=db.get_sensor_frequencies(additional_sql="active=1")
 #Calculate looping frequency
 loop_freq=funk.get_loop_frequency(sensor_freq)
 
+
 #########################
 ####### MAIN LOOP #######
 #########################
-
-if __name__=='__main__':
-    main()
-
 def main():
     while 1==1:
         
@@ -80,5 +77,5 @@ def main():
         time.sleep(60*loop_freq)
         
 
-
-
+if __name__=='__main__':
+    main()
