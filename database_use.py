@@ -44,12 +44,12 @@ def write_to_db(table, write_info,db=plant_db):
 def build_SQL_insert(table_name):
     #returns sql string of command
     
-    if table_name=='soilsensor':
-        return "INSERT INTO soilsensor (DateTime, plant_id, SoilTemp_DegC, SoilMoisture_val) VALUES (%s, %s, %s, %s)"
+    if table_name=='soilsensor_trans':
+        return "INSERT INTO soilsensor_trans (DateTime, plant_id, SoilTemp_DegC, SoilMoisture_val) VALUES (%s, %s, %s, %s)"
     else:
         return ''
 
 
 if __name__=="__main__":
     print("Attempting to write to DB")
-    write_to_db(db=plant_db,table='soilsensor',write_info=['2020-08-31','testPlant',20,390])
+    write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','testPlant',20,390])
