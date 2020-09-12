@@ -23,7 +23,7 @@ def get_loop_frequency(numlist):
     num_min=min(reclist)
     if num_min<1 and num_min>0:
         #need to calculate new GCM
-        GCD=(math.gcd(math.floor(num_min*60),60))
+        GCD=(math.gcd(math.floor(num_min*60),60))/60
     
     return GCD        
 
