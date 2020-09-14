@@ -45,7 +45,7 @@ GENERAL ALGORITHM:
 #########################
 
 #Check Peripherals
-    #Build list of available sensors
+    #Build list of sensors in-use
 sensors=db.get_sensor_list(additional_sql="active=1")
 sensor_freq=db.get_sensor_frequencies(additional_sql="active=1")
 

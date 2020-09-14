@@ -85,7 +85,25 @@ def get_sensor_frequencies(additional_sql):
     mycursor.close()
     
     return sensor_list
+
+def build_plant_devices_list():
+    #used to build the main list of plant devices and characteristics used in program
     
+    #Output tuple as: PlantID, Plant Name, Device_ID, Device Name, Action_Frequency_Min
+    
+    #Build SQL string
+    sql="SELECT DISTINCT D_PD.id_plant AS Plant_ID, D_P.name AS Plant_Name, D_PD.id_device AS Device_ID, D_D.model AS Device_Name, COALESCE(D_PD.action_freq_mins, D_D.default_action_freq_mins) AS Action_Frequency FROM def_plant_devices AS D_PD INNER JOIN def_plants AS D_P ON D_PD.id_plant=D_P.id INNER JOIN def_devices AS D_D ON D_PD.id_device=D_D.id WHERE D_P.active=1 AND D_D.supported=1 AND D_PD.active=1"
+    
+        #execute query
+    mycursor=plant_db.cursor()
+    mycursor.execute(sql)
+    
+    device_list=mycursor.fetchall()
+        
+    mycursor.close()
+    
+    return device_list
+
 if __name__=="__main__":
     print("Attempting to write to DB")
-    write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','testPlant',20,390])
+    write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','1',20,390])
