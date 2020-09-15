@@ -38,6 +38,7 @@ GENERAL ALGORITHM:
             -NOTIFY SUBSCRIBER(S) VIA EMAIL
 """
 
+#TODO: find good way of resetting the loop counter
 
 
 #########################
@@ -64,17 +65,26 @@ loop_freq=funk.get_loop_frequency(action_freq_list)
 ####### MAIN LOOP #######
 #########################
 def main():
+    
+    loopcounter=1
+    
     while 1==1:
         
         #Check sensors
-        for s in sensors:
-            #Check if check interval has elapsed
-                #Yes
-                #Record sensor value
-                #Reset interval counter
+        for action in plant_devices_list:
+            plant_id, plant_name, device_id, device_name, action_freq=action
             
-            #Increment interval counter
-            break
+            #Condition frequency value (if required)
+            action_freq=funk.condition_frequency(action_freq)
+            
+            #Check if interval has elapsed
+            if(loopcounter%action_freq==0):
+                #Yes
+                #Perform Action
+                funk.perform_action(action)
+            
+        #Increment interval counter
+        loopcounter+=1 
         
         time.sleep(60*loop_freq)
         
