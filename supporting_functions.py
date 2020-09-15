@@ -47,6 +47,13 @@ def get_action_freqs(plant_device_list):
     
     return freq_list
 
+def condition_frequency(num):
+    #return suitable frequency
+    
+    if num>1 and num!=math.ceil(num):    
+        num=math.floor(num)
+    return num
+    
 def perform_action(action):
     #called by main loop when specified frequency has elapsed
     
@@ -61,6 +68,6 @@ def perform_action(action):
         soil_temp=soilsensor.get_temp()
         soil_moisture=soilsensor.get_moisure()
         
-        database_use.write_to_db(db=plant_db,table='soilsensor_trans',write_info=[datetime.now(),plant_id,soil_temp,soil_moisture])
+        database_use.write_to_db(table='soilsensor_trans',write_info=[datetime.now(),plant_id,soil_temp,soil_moisture])
 
     return
