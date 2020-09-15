@@ -39,8 +39,6 @@ def write_to_db(table, write_info,db=plant_db):
     except:
         print("Failed to write to database")
 
-
-
 def build_SQL_insert(table_name):
     #returns sql string of command
     
