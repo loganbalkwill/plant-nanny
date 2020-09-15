@@ -27,4 +27,17 @@ def get_loop_frequency(numlist):
     
     return GCD        
 
-        
+def get_action_freqs(plant_device_list):
+    #returns list of action frequencies from main list
+    
+    #input list in the form of:
+    #PlantID, Plant Name, Device_ID, Device Name, Action_Frequency_Min
+    
+    freq_list=[]
+    
+    for rw in plant_device_list:
+        for plant_id, plant_name, device_id, device_name, action_freq in rw:
+            freq_list.append(action_freq)
+            
+    
+    return freq_list
