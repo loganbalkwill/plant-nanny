@@ -36,8 +36,8 @@ def get_action_freqs(plant_device_list):
     freq_list=[]
     
     for rw in plant_device_list:
-        for plant_id, plant_name, device_id, device_name, action_freq in rw:
-            freq_list.append(action_freq)
+        plant_id, plant_name, device_id, device_name, action_freq=rw
+        freq_list.append(action_freq)
             
     
     return freq_list
