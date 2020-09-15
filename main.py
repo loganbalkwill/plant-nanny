@@ -49,13 +49,15 @@ GENERAL ALGORITHM:
 plant_devices_list=db.build_plant_devices_list()
 action_freq_list=funk.get_action_freqs(plant_devices_list)
 
+    #Calculate looping frequency
+loop_freq=funk.get_loop_frequency(action_freq)
+
 #Check Database Connection
     #Check for queued logs
 
 #Check Emailing Functionality
 
-#Calculate looping frequency
-loop_freq=funk.get_loop_frequency(sensor_freq)
+
 
 
 #########################
