@@ -46,8 +46,8 @@ GENERAL ALGORITHM:
 
 #Check Peripherals
     #Build list of sensors in-use
-sensors=db.get_sensor_list(additional_sql="active=1")
-sensor_freq=db.get_sensor_frequencies(additional_sql="active=1")
+plant_devices_list=db.build_plant_devices_list()
+action_freq_list=funk.get_action_freqs(plant_devices_list)
 
 #Check Database Connection
     #Check for queued logs
