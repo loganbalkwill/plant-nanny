@@ -4,7 +4,8 @@ import busio
 
 import settings
 import adafruit_sgp30  #SGP30 Air Gas Sensor 
-from adafruit_seesaw.seesaw import Seesaw 
+from adafruit_seesaw.seesaw import Seesaw #STEMMA Soil Sensor
+import adafruit_apds9960.apds9960 #APDS9960 light sensor
 
 
 #Initialize the I2C interface
@@ -13,11 +14,14 @@ i2c = busio.I2C(SCL, SDA, frequency=100000)
 # Create sensor objects existing on the I2C port
 sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c)
 ss = Seesaw(i2c, addr=settings.addr_sensor_soil)
+apds = adafruit_apds9960.apds9960.APDS9960(i2c)
 
 #Initiate sensor objects (if required)
 sgp30.iaq_init()
 sgp30.set_iaq_baseline(0x8973, 0x8AAE)
- 
+
+apds.enable_color=True
+
 elapsed_sec = 0
 
 #SENSOR FUNCTIONS
@@ -37,6 +41,10 @@ def get_air_co2():
 def get_air_tvoc():
     #retrieve latest air TVOC reading
     return sgp30.TVOC
+
+def get_light_rgbc():
+    #retrieves latest lighting conditions
+    return apds.color_data
 
 
 
