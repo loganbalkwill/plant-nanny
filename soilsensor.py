@@ -1,3 +1,7 @@
+#THIS MODULE IS DEPRICATED!!!
+
+
+
 import time
 
 from board import SCL, SDA

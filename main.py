@@ -16,7 +16,6 @@ import time
 import math
 import settings as s
 import supporting_functions as funk
-import soilsensor
 import database_use as db
 
 """
