@@ -44,6 +44,8 @@ def build_SQL_insert(table_name):
     
     if table_name=='soilsensor_trans':
         return "INSERT INTO soilsensor_trans (DateTime, plant_id, SoilTemp_DegC, SoilMoisture_val) VALUES (%s, %s, %s, %s)"
+    if table_name=='gassensor_trans':
+        return "INSERT INTO `gassensor_trans` (`record_id`, `DateTime`, `plant_id`, `eCO2_ppm`, `TVOC_ppb`) VALUES (NULL, %s, %s, %s, %s)"
     else:
         return ''
 
