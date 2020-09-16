@@ -17,3 +17,4 @@ read_frequency_mins=1
 #I2C Instruments
 
 addr_sensor_soil=0X36
+addr_sensor_gas=0X58
