@@ -4,6 +4,7 @@ from datetime import datetime
 import settings
 import database_use
 import soilsensor
+import gassensor
 
 def get_loop_frequency(numlist):
     #returns the frequency of looping in the main procedure
@@ -68,6 +69,19 @@ def perform_action(action):
         soil_temp=soilsensor.get_temp()
         soil_moisture=soilsensor.get_moisure()
         
-        database_use.write_to_db(table='soilsensor_trans',write_info=[datetime.now(),plant_id,soil_temp,soil_moisture])
-
+        database_use.write_to_db(table='soilsensor_trans',
+                                 write_info=[datetime.now(),
+                                             plant_id,
+                                             soil_temp,
+                                             soil_moisture])
+    elif device_name=='SGP30':
+        #retrieve values and insert record into database
+        air_eco2=gassensor.get_co2()
+        air_tvoc=gassensor.get_tvoc()
+        
+        database_use.write_to_db(table='gassensor_trans',
+                                 write_info=[datetime.now(),
+                                             plant_id,
+                                             air_eco2,
+                                             air_tvoc]
     return
