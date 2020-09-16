@@ -1,10 +1,10 @@
 import math
 import time
 from datetime import datetime
+
 import settings
 import database_use
-import soilsensor
-import gassensor
+import sensors
 
 def get_loop_frequency(numlist):
     #returns the frequency of looping in the main procedure
@@ -66,8 +66,8 @@ def perform_action(action):
     #decide what action to perform
     if device_name=='STEMMA Soil Sensor':
         #retrieve values and insert record into database
-        soil_temp=soilsensor.get_temp()
-        soil_moisture=soilsensor.get_moisure()
+        soil_temp=sensors.get_soil_temp()
+        soil_moisture=sensors.get_soil_moisture()
         
         database_use.write_to_db(table='soilsensor_trans',
                                  write_info=[datetime.now(),
@@ -76,12 +76,12 @@ def perform_action(action):
                                              soil_moisture])
     elif device_name=='SGP30':
         #retrieve values and insert record into database
-        air_eco2=gassensor.get_co2()
-        air_tvoc=gassensor.get_tvoc()
+        air_eco2=sensors.get_air_co2()
+        air_tvoc=sensors.get_air_tvoc()
         
         database_use.write_to_db(table='gassensor_trans',
                                  write_info=[datetime.now(),
                                              plant_id,
                                              air_eco2,
-                                             air_tvoc]
-    return
+                                             air_tvoc])
+    return    
