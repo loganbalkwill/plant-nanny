@@ -8,7 +8,7 @@ from adafruit_seesaw.seesaw import Seesaw
 
 
 #Initialize the I2C interface
-i2c = busio.I2C(board.SCL, board.SDA, frequency=100000)
+i2c = busio.I2C(SCL, SDA, frequency=100000)
  
 # Create sensor objects existing on the I2C port
 sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c)
