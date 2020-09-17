@@ -1,10 +1,12 @@
 import math
 import time
 from datetime import datetime
+from picamera import PiCamera
 
 import settings
 import database_use
 import sensors
+
 
 def get_loop_frequency(numlist):
     #returns the frequency of looping in the main procedure
@@ -105,5 +107,29 @@ def perform_action(action):
                                              temp,
                                              humidity,
                                              gasses,
-                                             pressure])     
+                                             pressure])
+    elif device_name=='PiCamera':
+        #Takes photo, stores to predefined location, writes info to database
+        camera=PiCamera()
+        
+        #Build the string of file name + location
+        path= settings.image_directory
+        sub_path=plant_id + " | " + plant_name
+        now=datetime.now()
+        filename=now.strftime("%m-%d-%Y, %H:%M:%S")
+        filetype=settings.image_filetype
+        
+        fullpath=path+ '\' + sub_path + '\' + filename + filetype
+        
+        camera.start_preview()
+        sleep(5) #Important to allow camera to stabilize the image
+        
+        camera.capture(fullpath)
+        camera.stop_preview()
+        
+        database_use.write_to_db(table='photo_trans',
+                                 write_info=[datetime.now(),
+                                             plant_id,
+                                             fullpath])
+        
     return    
