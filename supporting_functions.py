@@ -57,6 +57,23 @@ def condition_frequency(num):
     if num>1 and num!=math.ceil(num):    
         num=math.floor(num)
     return num
+
+
+
+def get_photos_path(plant_id, plant_name):   
+    #Build the string of file name + location
+    path= settings.image_directory
+    sub_path=str(plant_id) + "|" + str(plant_name)
+    now=datetime.now()
+    filename=str(now.strftime("%m-%d-%Y %H:%M:%S"))
+    filetype=settings.image_filetype
+    
+    fullpath=path+ sub_path + '/' + filename + filetype
+    
+    #Make directory if doesnt already exist
+    if os.path.exists(path + sub_path)==False:
+        os.mkdir(path + sub_path + '/')
+    
     
 def perform_action(action):
     #called by main loop when specified frequency has elapsed
@@ -113,18 +130,7 @@ def perform_action(action):
         #Takes photo, stores to predefined location, writes info to database
         camera=PiCamera()
         
-        #Build the string of file name + location
-        path= settings.image_directory
-        sub_path=str(plant_id) + "|" + str(plant_name)
-        now=datetime.now()
-        filename=str(now.strftime("%m-%d-%Y %H:%M:%S"))
-        filetype=settings.image_filetype
-        
-        fullpath=path+ sub_path + '/' + filename + filetype
-        
-        #Make directory if doesnt already exist
-        if os.path.exists(path + sub_path)==False:
-            os.mkdir(path + sub_path + '/')
+        fullpath=get_photos_path(plant_id, plant_name)
         
         camera.start_preview()
         time.sleep(5) #Important to allow camera to stabilize the image
