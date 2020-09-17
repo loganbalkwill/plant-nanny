@@ -18,3 +18,8 @@ read_frequency_mins=1
 
 addr_sensor_soil=0X36
 addr_sensor_gas=0X58
+
+
+#Camera Information
+image_directory='/home/pi/Desktop/Plant-Photos/'
+image_filetype='.jpg'

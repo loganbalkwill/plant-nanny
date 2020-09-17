@@ -119,7 +119,7 @@ def perform_action(action):
         filename=now.strftime("%m-%d-%Y, %H:%M:%S")
         filetype=settings.image_filetype
         
-        fullpath=path+ '\' + sub_path + '\' + filename + filetype
+        fullpath=path+ sub_path + '/' + filename + filetype
         
         camera.start_preview()
         sleep(5) #Important to allow camera to stabilize the image
