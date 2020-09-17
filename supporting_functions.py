@@ -74,6 +74,7 @@ def get_photos_path(plant_id, plant_name):
     if os.path.exists(path + sub_path)==False:
         os.mkdir(path + sub_path + '/')
     
+    return fullpath
     
 def perform_action(action):
     #called by main loop when specified frequency has elapsed
