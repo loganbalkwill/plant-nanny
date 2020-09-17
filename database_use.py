@@ -54,6 +54,9 @@ def build_SQL_insert(table_name):
     elif table_name=='airsensor_trans':
         return "INSERT INTO `airsensor_trans` (`record_id`, `DateTime`, `plant_id`, `AirTemp_DegC`, `AirHumidity_percent`, `AirGas_ohms`, `AirPressure_hpa`) VALUES (NULL, %s, %s, %s, %s, %s, %s)"
     
+    elif table_name=='photo_trans':
+        return "INSERT INTO `photo_trans` (`record_id`, `capture_datetime`, `plant_id`, `image_path`) VALUES (NULL, %s, %s, %s)"
+    
     else:
         return ''
 
