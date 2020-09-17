@@ -92,5 +92,18 @@ def perform_action(action):
                                  write_info=[datetime.now(),
                                              plant_id,
                                              r, g, b, c])
+    elif device_name=='BME680':
+        #retrieve values and insert record into database
+        temp=sensors.get_air_temp()
+        humidity=sensors.get_air_humidity()
+        pressure=sensors.get_air_pressure()
+        gasses=sensors.get_air_gas()
         
+        database_use.write_to_db(table='airsensor_trans',
+                                 write_info=[datetime.now(),
+                                             plant_id,
+                                             temp,
+                                             humidity,
+                                             gasses,
+                                             pressure])     
     return    
