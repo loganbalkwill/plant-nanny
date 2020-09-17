@@ -21,5 +21,5 @@ addr_sensor_gas=0X58
 
 
 #Camera Information
-image_directory='/home/pi/Desktop/Plant-Photos/'
+image_directory='/home/pi/Pictures/Plant-Photos/'
 image_filetype='.jpg'

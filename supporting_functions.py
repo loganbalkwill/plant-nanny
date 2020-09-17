@@ -1,5 +1,6 @@
 import math
 import time
+import os
 from datetime import datetime
 from picamera import PiCamera
 
@@ -114,15 +115,19 @@ def perform_action(action):
         
         #Build the string of file name + location
         path= settings.image_directory
-        sub_path=plant_id + " | " + plant_name
+        sub_path=str(plant_id) + "|" + str(plant_name)
         now=datetime.now()
-        filename=now.strftime("%m-%d-%Y, %H:%M:%S")
+        filename=str(now.strftime("%m-%d-%Y %H:%M:%S"))
         filetype=settings.image_filetype
         
         fullpath=path+ sub_path + '/' + filename + filetype
         
+        #Make directory if doesnt already exist
+        if os.path.exists(path + sub_path)==False:
+            os.mkdir(path + sub_path + '/')
+        
         camera.start_preview()
-        sleep(5) #Important to allow camera to stabilize the image
+        time.sleep(5) #Important to allow camera to stabilize the image
         
         camera.capture(fullpath)
         camera.stop_preview()
