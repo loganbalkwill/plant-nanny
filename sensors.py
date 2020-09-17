@@ -44,11 +44,13 @@ def get_air_tvoc():
 
 def get_light_rgbc():
     #retrieves latest lighting conditions
-    return apds.color_data
-
+    r,g,b,c= apds.color_data
+    return (r,g,b,c)
 
 
 if __name__=='__main__':
+    
+    print(get_light_rgbc())
     while True:
         print("eCO2 = %d ppm \t TVOC = %d ppb" % (sgp30.eCO2, sgp30.TVOC))
         time.sleep(1)

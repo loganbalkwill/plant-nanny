@@ -86,9 +86,9 @@ def perform_action(action):
                                              air_tvoc])
     elif device_name=='APDS9960':
         #retrieve values and insert record into database
-        r,g,b,c=sensors.get_light_rgbc
+        r,g,b,c=sensors.get_light_rgbc()
         
-        database_use.write_to_db(table='gassensor_trans',
+        database_use.write_to_db(table='lightsensor_trans',
                                  write_info=[datetime.now(),
                                              plant_id,
                                              r, g, b, c])
