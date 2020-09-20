@@ -1,5 +1,4 @@
-#THIS MODULE IS DEPRICATED!!!!
-
+#THIS MODULE HAS BEEN DEPRICATED!!
 
 import time
 from board import SCL, SDA
@@ -15,7 +14,7 @@ print("SGP30 serial #", [hex(i) for i in sgp30.serial])
  
 sgp30.iaq_init()
 sgp30.set_iaq_baseline(0x8973, 0x8AAE)
- 
+
 elapsed_sec = 0
 
 def get_co2():

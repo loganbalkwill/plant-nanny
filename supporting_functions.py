@@ -1,6 +1,7 @@
 import math
 import time
 import os
+import subprocess
 from datetime import datetime
 from picamera import PiCamera
 
@@ -145,3 +146,17 @@ def perform_action(action):
                                              fullpath])
         
     return    
+
+
+def find_i2c_devices():
+    #Called when main.py is initialized, then regularly
+    #used to detect available I2C devices
+
+    p = subprocess.Popen(['i2cdetect', '-y','1'],stdout=subprocess.PIPE,) 
+    #cmdout = str(p.communicate())
+
+    for i in range(0,9):
+      line = str(p.stdout.readline())
+
+    print(line)
+    
