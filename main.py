@@ -15,11 +15,11 @@ __email__     = "lgb0020@gmail.com"
 import time
 import math
 import settings as s
-import supporting_functions.looping as looping
-import supporting_functions.logging as logging
-import supporting_functions.actions as actions
-import supporting_functions.device_info as device_info
-import database_use as db
+import supporting_modules.looping as looping
+import supporting_modules.logging as logging
+import supporting_modules.actions as actions
+import supporting_modules.device_info as device_info
+import supporting_modules.database_use as db
 
 """
 GENERAL ALGORITHM:
