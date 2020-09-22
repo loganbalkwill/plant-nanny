@@ -1,3 +1,6 @@
+import sys
+
+sys.path.insert(0, '..')
 
 def log_action(event[],result):
     return ''

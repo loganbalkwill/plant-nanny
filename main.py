@@ -15,7 +15,9 @@ __email__     = "lgb0020@gmail.com"
 import time
 import math
 import settings as s
-import supporting_functions as funk
+import supporting_functions.looping as looping
+import supporting_functions.logging as logging
+import supporting_functions.actions as actions
 import database_use as db
 
 """
