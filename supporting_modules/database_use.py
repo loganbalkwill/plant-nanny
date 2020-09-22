@@ -57,6 +57,8 @@ def build_SQL_insert(table_name):
     elif table_name=='photo_trans':
         return "INSERT INTO `photo_trans` (`record_id`, `capture_datetime`, `plant_id`, `image_path`) VALUES (NULL, %s, %s, %s)"
     
+    elif table_name=='log_trans':
+        return "INSERT INTO `log_trans` (`record_id`, `datetime`, `log_type`, `log_message`) VALUES (NULL, %s, %s, %s)"
     else:
         return ''
 
