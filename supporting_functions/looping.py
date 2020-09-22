@@ -1,10 +1,15 @@
+import sys
 import math
 
-def get_loop_frequency(numlist, default_frequency=1):
+sys.path.insert(0, '..')
+
+import settings
+
+def get_loop_frequency(numlist):
     #returns the frequency of looping in the main procedure
     
     #default returns 1 minute
-    GCD=default_frequency
+    GCD=settings.read_frequency_mins
     reclist=[]
     #if any of the numbers provided are less than 1 minute (non-negative),
     #a greatest common divisor (GCD) is calculated
