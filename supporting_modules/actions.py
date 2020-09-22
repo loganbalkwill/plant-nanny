@@ -1,19 +1,15 @@
-# import math
-# import time
-# import os
+import os
 import sys
-# import subprocess
-# from datetime import datetime
-# from picamera import PiCamera
-#
-#sys.path.append("..\<parent_folder>")
+
+import time
+from datetime import datetime
+from picamera import PiCamera
+
 sys.path.insert(0, '..')
 
 import settings
 import database_use
 import sensors
-
-
 
 
 def get_photos_path(plant_id, plant_name):   
