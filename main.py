@@ -87,7 +87,7 @@ def main():
                     actions.perform_action(action)
                     logging.log_action(action,"success")
                 except:
-                    logging.log_action(action,"fail")
+                    logging.log_action(action,"failure")
             
         #Increment interval counter
         try:
