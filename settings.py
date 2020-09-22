@@ -12,7 +12,8 @@ phpmyadmin_password='Balk45610'
 
 #Local Logging Information:
 #(only used to store data if MySQL database is unavailable)
-log_folder=
+log_directory='/home/pi/Documents/Plant_Nanny/Logs/'
+file_suffix='.csv'
 
 #Instrument Settings
 read_frequency_mins=1
