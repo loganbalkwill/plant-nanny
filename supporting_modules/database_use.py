@@ -5,6 +5,7 @@ sys.path.insert(0, '..')
 
 import mysql.connector
 import settings as s
+import supporting_modules.logger as logger
 
 
 """ TODO
@@ -39,7 +40,10 @@ def write_to_db(table, write_info,db=plant_db):
         print(cursor.rowcount, "record inserted to %s table" % table)
     
     except:
+        #failed to write to the database; store info locally
         print("Failed to write to database")
+        logger.log_locally(info=write_info, filename=table)
+        
 
 def build_SQL_insert(table_name):
     #returns sql string of command
