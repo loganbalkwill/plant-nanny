@@ -10,6 +10,9 @@ password='mainuser'
 
 phpmyadmin_password='Balk45610'
 
+#Local Logging Information:
+#(only used to store data if MySQL database is unavailable)
+log_folder=
 
 #Instrument Settings
 read_frequency_mins=1
@@ -21,5 +24,6 @@ addr_sensor_gas=0X58
 
 
 #Camera Information
-image_directory='/home/pi/Pictures/Plant-Photos/'
+image_directory='/home/pi/Documents/Plant_Nanny/Plant-Photos/'
 image_filetype='.jpg'
+
