@@ -51,7 +51,7 @@ plant_devices_list=db.build_plant_devices_list()
 action_freq_list=funk.get_action_freqs(plant_devices_list)
 
     #Calculate looping frequency
-loop_freq=funk.get_loop_frequency(action_freq_list)
+loop_freq=funk.get_loop_frequency(action_freq_list, s.read_frequency_mins)
 
 #Check Database Connection
     #Check for queued logs
