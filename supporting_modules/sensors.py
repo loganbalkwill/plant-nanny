@@ -1,6 +1,9 @@
+import sys
 import time
 from board import SCL, SDA
 import busio
+
+sys.path.insert(0, '..')
 
 import settings
 import adafruit_sgp30  #SGP30 Air Gas Sensor 

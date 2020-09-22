@@ -1,5 +1,7 @@
 #Created by Logan Balkwill
 #Created on 8-30-2020
+import sys
+sys.path.insert(0, '..')
 
 import mysql.connector
 import settings as s
