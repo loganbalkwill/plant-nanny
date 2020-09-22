@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, '..')
 
 import settings
-import database_use as db
+import supporting_modules.database_use as db
 
 def log_action(event,result, additional_info=''):
     #break apart event into components

@@ -8,8 +8,8 @@ from picamera import PiCamera
 sys.path.insert(0, '..')
 
 import settings
-import database_use
-import sensors
+import supporting_modules.database_use
+import supporting_modules.sensors
 
 
 def get_photos_path(plant_id, plant_name):   
