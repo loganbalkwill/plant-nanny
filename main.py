@@ -58,6 +58,7 @@ loop_freq=looping.get_loop_frequency(action_freq_list)
 
 #Check Database Connection
     #Check for queued logs
+logs_queued=logging.local_logs_exist()
 
 #Check Emailing Functionality
 

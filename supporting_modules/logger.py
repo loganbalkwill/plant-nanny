@@ -31,7 +31,7 @@ def log_action(event,result, additional_info=''):
     
 def log_info(log_level,message):
     
-    if log_level='p':
+    if log_level=='p':
         print(message)
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
@@ -63,11 +63,23 @@ def local_logs_exist():
     for filename in os.listdir(directory):
         if filename.endswith(".txt") or filename.endswith(".csv"):
             logfiles+=1
-            for line in open(directory + filename).xreadlines():
+            f=open(directory+filename,"r")
+            for line in f:
                 count+= 1
         else:
             otherfile+=1
-    
-    print("%s log(s) exist between %s log file(s) (%s non-log files exist)" % (count, logfiles, otherfiles)
-    #return count, logfiles, otherfiles
             
+    if otherfiles!=0:
+        msg="%s log(s) exist between %s log file(s) (%s non-log files exist)" % (count, logfiles, otherfiles)
+    else:
+        msg="%s log(s) exist between %s log file(s)" % (count, logfiles)
+
+    if count>0:
+        log_info('i',msg)
+    else:
+        log_info('p',msg)
+        
+    return count
+
+if __name__=="__main__":
+    local_logs_exist()
