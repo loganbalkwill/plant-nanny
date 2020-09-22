@@ -49,7 +49,7 @@ def log_locally(info, filename, folder_path=settings.log_directory, filetype=set
     
     #Write information to file
     f=open(fullpath,"a")
-    f.write(info)
+    f.write(str(info))
     f.close()
 
 def local_logs_exist():
@@ -80,6 +80,8 @@ def local_logs_exist():
         log_info('p',msg)
         
     return count
+
+
 
 if __name__=="__main__":
     local_logs_exist()
