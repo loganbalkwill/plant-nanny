@@ -16,7 +16,7 @@ import time
 import math
 import settings as s
 import supporting_modules.looping as looping
-import supporting_modules.logging as logging
+import supporting_modules.logger as logging
 import supporting_modules.actions as actions
 import supporting_modules.device_info as device_info
 import supporting_modules.database_use as db

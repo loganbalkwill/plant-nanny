@@ -1,4 +1,5 @@
 import subprocess
+import logger
 
 def find_i2c_devices():
     #Called when main.py is initialized, then regularly
@@ -23,6 +24,8 @@ def find_i2c_devices():
                     device_list.append('0x'+str(addr))
                 except:
                     pass
+    
+    logger.log_info(log_level='d', message='Scanned I2C devices... Result: %s' % device_list)
     
     return device_list
 
