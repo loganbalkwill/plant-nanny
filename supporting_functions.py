@@ -174,3 +174,10 @@ def find_i2c_devices():
     
     return device_list
 
+def log_action(event[],result):
+    return ''
+def log_info(log_level,message):
+    return ''
+
+def reset_loopcounter(counter, frequency_list[]):
+    return 1

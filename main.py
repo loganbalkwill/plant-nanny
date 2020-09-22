@@ -82,9 +82,9 @@ def main():
                 #Yes; Perform Action
                 try:
                     funk.perform_action(action)
-                    funk.log_action(action)
+                    funk.log_action(action,"success")
                 except:
-                    funk.log_inaction(action)
+                    funk.log_action(action,"fail")
             
         #Increment interval counter
         try:
