@@ -1,7 +1,9 @@
+from datetime import datetime
 import sys
 sys.path.insert(0, '..')
 
 import settings
+import database_use as db
 
 def log_action(event,result, additional_info=''):
     #break apart event into components
@@ -27,4 +29,7 @@ def log_action(event,result, additional_info=''):
     
 def log_info(log_level,message):
     
-    return ''
+    database_use.write_to_db(table='log_trans',
+                             write_info=[datetime.now(),
+                                         log_level,
+                                         message])
