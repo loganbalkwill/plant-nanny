@@ -16,7 +16,7 @@ def log_action(event,result, additional_info=''):
         message_prefix='Successfully performed device action(s): '
     elif result=='failure':
         severity='w' #warning
-        message_prefix='Failed to performe device action(s): '
+        message_prefix='Failed to perform device action(s): '
         
     message_base= 'plant_id= %s, plant_name= %s, device_id= %s, device_name= %s' % (plant_id, plant_name, device_id, device_name)
     
@@ -34,6 +34,7 @@ def log_info(log_level,message):
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
+
 
 def log_locally(info, filename, folder_path=settings.log_directory, filetype=settings.file_suffix):
     #called when database is unavailable

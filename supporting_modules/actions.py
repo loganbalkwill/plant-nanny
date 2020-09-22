@@ -8,8 +8,8 @@ from picamera import PiCamera
 sys.path.insert(0, '..')
 
 import settings
-import supporting_modules.database_use
-import supporting_modules.sensors
+import supporting_modules.database_use as database_use
+import supporting_modules.sensors as sensors
 
 camera=PiCamera()
 
