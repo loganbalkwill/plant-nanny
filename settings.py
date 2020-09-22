@@ -19,8 +19,9 @@ file_suffix='.txt'
 log_levels=(
     'i', #informational
     'w', #warning
-    'd', #debugging
+    #'d', #debugging
     's', #severe
+    'p', #print (prints to the shell; not logged into database)
     )
     
 #Instrument Settings

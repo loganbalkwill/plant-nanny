@@ -31,6 +31,8 @@ def log_action(event,result, additional_info=''):
     
 def log_info(log_level,message):
     
+    if log_level='p':
+        print(message)
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
@@ -49,3 +51,23 @@ def log_locally(info, filename, folder_path=settings.log_directory, filetype=set
     f=open(fullpath,"a")
     f.write(info)
     f.close()
+
+def local_logs_exist():
+    #checks if any queue exists for uploading data to database
+    directory=settings.log_directory
+    
+    count=0
+    logfiles=0
+    otherfiles=0
+    
+    for filename in os.listdir(directory):
+        if filename.endswith(".txt") or filename.endswith(".csv"):
+            logfiles+=1
+            for line in open(directory + filename).xreadlines():
+                count+= 1
+        else:
+            otherfile+=1
+    
+    print("%s log(s) exist between %s log file(s) (%s non-log files exist)" % (count, logfiles, otherfiles)
+    #return count, logfiles, otherfiles
+            
