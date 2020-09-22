@@ -1,5 +1,5 @@
 from datetime import datetime
-import sys
+import os, sys
 sys.path.insert(0, '..')
 
 import settings
@@ -34,3 +34,17 @@ def log_info(log_level,message):
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
+
+def log_locally(info, filename, folder_path=settings.log_directory, filetype=settings.file_suffix):
+    #called when database is unavailable
+    
+    fullpath=folder_path + filename + filetype
+    
+    #Make directory if doesnt already exist
+    if os.path.exists(folder_path)==False:
+        os.mkdir(folder_path)
+    
+    #Write information to file
+    f=open(fullpath,"a")
+    f.write(info)
+    f.close()

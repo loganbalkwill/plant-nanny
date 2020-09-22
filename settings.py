@@ -13,7 +13,7 @@ phpmyadmin_password='Balk45610'
 #Local Logging Information:
 #(only used to store data if MySQL database is unavailable)
 log_directory='/home/pi/Documents/Plant_Nanny/Logs/'
-file_suffix='.csv'
+file_suffix='.txt'
 
 #Log levels permitted; comment out any undesired level
 log_levels=(
