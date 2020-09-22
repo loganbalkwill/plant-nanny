@@ -46,6 +46,7 @@ GENERAL ALGORITHM:
 
 #Check Peripherals
     #Build list of sensors in-use
+i2c_available=funk.find_i2c_devices()
 plant_devices_list=db.build_plant_devices_list()
 action_freq_list=funk.get_action_freqs(plant_devices_list)
 
@@ -78,13 +79,20 @@ def main():
             
             #Check if interval has elapsed
             if(loopcounter%action_freq==0):
-                #Yes
-                #Perform Action
-                funk.perform_action(action)
+                #Yes; Perform Action
+                try:
+                    funk.perform_action(action)
+                    funk.log_action(action)
+                except:
+                    funk.log_inaction(action)
             
         #Increment interval counter
-        loopcounter+=1 
-        
+        try:
+            loopcounter+=1
+        except:
+            funk.reset_loopcounter(loopcounter)
+            
+            
         time.sleep(60*loop_freq)
         
 
