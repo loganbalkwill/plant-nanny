@@ -12,7 +12,7 @@ def log_action(event,result, additional_info=''):
     
     #create writing information
     if result=='success':
-        severity='i' #informational
+        severity='d' #informational
         message_prefix='Successfully performed device action(s): '
     elif result=='failure':
         severity='w' #warning
