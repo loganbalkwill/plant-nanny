@@ -11,6 +11,7 @@ import settings
 import supporting_modules.database_use
 import supporting_modules.sensors
 
+camera=PiCamera()
 
 def get_photos_path(plant_id, plant_name):   
     #Build the string of file name + location
@@ -81,7 +82,6 @@ def perform_action(action):
                                              pressure])
     elif device_name=='PiCamera':
         #Takes photo, stores to predefined location, writes info to database
-        camera=PiCamera()
         
         fullpath=get_photos_path(plant_id, plant_name)
         
