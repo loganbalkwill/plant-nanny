@@ -15,6 +15,14 @@ phpmyadmin_password='Balk45610'
 log_directory='/home/pi/Documents/Plant_Nanny/Logs/'
 file_suffix='.csv'
 
+#Log levels permitted; comment out any undesired level
+log_levels=(
+    'i', #informational
+    'w', #warning
+    'd', #debugging
+    's', #severe
+    )
+    
 #Instrument Settings
 read_frequency_mins=1
 
