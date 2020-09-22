@@ -1,3 +1,4 @@
+import subprocess
 
 def find_i2c_devices():
     #Called when main.py is initialized, then regularly
@@ -26,3 +27,5 @@ def find_i2c_devices():
     return device_list
 
 
+if __name__=='__main__':
+    print(find_i2c_devices())

@@ -18,6 +18,7 @@ import settings as s
 import supporting_functions.looping as looping
 import supporting_functions.logging as logging
 import supporting_functions.actions as actions
+import supporting_functions.device_info as device_info
 import database_use as db
 
 """
@@ -48,12 +49,12 @@ GENERAL ALGORITHM:
 
 #Check Peripherals
     #Build list of sensors in-use
-i2c_available=funk.find_i2c_devices()
+i2c_available=device_info.find_i2c_devices()
 plant_devices_list=db.build_plant_devices_list()
-action_freq_list=funk.get_action_freqs(plant_devices_list)
+action_freq_list=looping.get_action_freqs(plant_devices_list)
 
     #Calculate looping frequency
-loop_freq=funk.get_loop_frequency(action_freq_list)
+loop_freq=looping.get_loop_frequency(action_freq_list)
 
 #Check Database Connection
     #Check for queued logs
@@ -77,22 +78,22 @@ def main():
             plant_id, plant_name, device_id, device_name, action_freq=action
             
             #Condition frequency value (if required)
-            action_freq=funk.condition_frequency(action_freq)
+            action_freq=looping.condition_frequency(action_freq)
             
             #Check if interval has elapsed
             if(loopcounter%action_freq==0):
                 #Yes; Perform Action
                 try:
-                    funk.perform_action(action)
-                    funk.log_action(action,"success")
+                    actions.perform_action(action)
+                    logging.log_action(action,"success")
                 except:
-                    funk.log_action(action,"fail")
+                    logging.log_action(action,"fail")
             
         #Increment interval counter
         try:
             loopcounter+=1
         except:
-            funk.reset_loopcounter(loopcounter)
+            looping.reset_loopcounter(loopcounter)
             
             
         time.sleep(60*loop_freq)

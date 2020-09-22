@@ -101,3 +101,5 @@ def perform_action(action):
                                              fullpath])
         
     return    
+
+# if __name__=='__main__':
