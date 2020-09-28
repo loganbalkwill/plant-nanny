@@ -6,6 +6,7 @@ import busio
 sys.path.insert(0, '..')
 
 import settings
+import logging
 import adafruit_sgp30  #SGP30 Air Gas Sensor 
 from adafruit_seesaw.seesaw import Seesaw #STEMMA Soil Sensor
 import adafruit_apds9960.apds9960 #APDS9960 light sensor
@@ -16,11 +17,18 @@ import adafruit_bme680 #BME680 Air Condition Sensor
 i2c = busio.I2C(SCL, SDA, frequency=100000)
  
 # Create sensor objects existing on the I2C port
-sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c)
-ss = Seesaw(i2c, addr=settings.addr_sensor_soil)
-apds = adafruit_apds9960.apds9960.APDS9960(i2c)
-bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+try:    sgp30 = adafruit_sgp30.Adafruit_SGP30(i2c)
+except: logger.log_info(log_level='w', 'Failed to initialize SGP30 sensor')
 
+try:    ss = Seesaw(i2c, addr=settings.addr_sensor_soil)
+except: logger.log_info(log_level='w', 'Failed to initialize STEMMA Soil sensor')
+
+try:    apds = adafruit_apds9960.apds9960.APDS9960(i2c)
+except: logger.log_info(log_level='w', 'Failed to initialize APDS9960 sensor')
+
+try:    bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+except: logger.log_info(log_level='w', 'Failed to initialize BME680 sensor')
+    
 #Initiate sensor objects (if required)
 sgp30.iaq_init()
 sgp30.set_iaq_baseline(0x8973, 0x8AAE)
