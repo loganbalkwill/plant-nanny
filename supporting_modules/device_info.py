@@ -1,6 +1,5 @@
 import subprocess
-#import supporting_modules.logger as logger
-import logger
+import supporting_modules.logger as logger
 
 def find_i2c_devices():
     #Called when main.py is initialized, then regularly
