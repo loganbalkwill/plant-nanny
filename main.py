@@ -100,6 +100,7 @@ def main():
         
         #Check if system check interval has elapsed
         if (loopcounter % s.refresh_mins == 0):
+            logging.log_info( log_level='p', message="Checking for new information...")
             startup() #yep; run the startup procedure again
         
         
