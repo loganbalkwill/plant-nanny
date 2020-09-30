@@ -14,6 +14,15 @@ import settings as s
         -Logging database actions
 """
 
+def log_information(severity, msg):
+    import supporting_modules.logger as logging
+    logging.log_info(log_level=severity, message=msg)
+    
+def log_locally(i, f):
+    import supporting_modules.logger as logging
+    logging.log_locally(info=i,filename=f)
+    
+    
 try:
     plant_db=mysql.connector.connect(host=s.host,
                                      user=s.username,
@@ -128,14 +137,6 @@ def build_plant_devices_list():
     
     return device_list
 
-
-def log_information(severity, msg):
-    import supporting_modules.logger as logging
-    logging.log_info(log_level=severity, message=msg)
-    
-def log_locally(i, f):
-    import supporting_modules.logger as logging
-    logging.log_locally(info=i,filename=f)
 
 if __name__=="__main__":
     log_information(severity='p', msg="Attempting to write to DB")
