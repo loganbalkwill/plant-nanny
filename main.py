@@ -51,7 +51,7 @@ GENERAL ALGORITHM:
 i2c_available=[]
 plant_devices_list=[]
 action_freq_list=[]
-loop_freq=settings.read_frequency_mins
+loop_freq=s.read_frequency_mins
 logs_queued=0
 
 def startup():
