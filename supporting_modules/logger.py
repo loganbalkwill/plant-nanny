@@ -73,13 +73,9 @@ def local_logs_exist():
         msg="%s log(s) exist between %s log file(s) (%s non-log files exist)" % (count, logfiles, otherfiles)
     else:
         msg="%s log(s) exist between %s log file(s)" % (count, logfiles)
-
-    if count>0:
-        log_info('i',msg)
-    else:
-        log_info('p',msg)
         
-    return count
+        
+    return count, msg
 
 
 
