@@ -38,7 +38,7 @@ except:
                     msg=("FAILED to connect to database '%s'" % s.database_name)) 
 
 
-def write_to_db(table, write_info,db=plant_db):
+def write_to_db(table, write_info,db=plant_db, log_locally=True):
     #Write data to the database table
     
     # TEMPORARY!!! DELETE LATER
