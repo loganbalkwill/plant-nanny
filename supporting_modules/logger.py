@@ -32,7 +32,8 @@ def log_action(event,result, additional_info=''):
 def log_info(log_level,message):
     
     if log_level=='p':
-        print(datetime.now.strftime("%m/%d/%Y, %H:%M:%S") + ': ' + message)
+        dt=datetime.now()
+        print('(' + dt.strftime("%m/%d/%Y, %H:%M:%S") + '): ' + message)
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
@@ -49,7 +50,7 @@ def log_locally(info, filename, folder_path=settings.log_directory, filetype=set
     
     #Write information to file
     f=open(fullpath,"a")
-    f.write(str(info))
+    f.write(str(info) + '\n')
     f.close()
 
 def local_logs_exist():
