@@ -10,6 +10,9 @@ password='mainuser'
 
 phpmyadmin_password='Balk45610'
 
+#Interval for checking for new information
+refresh_mins=10
+
 #Local Logging Information:
 #(only used to store data if MySQL database is unavailable)
 log_directory='/home/pi/Documents/Plant_Nanny/Logs/'
