@@ -41,6 +41,9 @@ except:
 def write_to_db(table, write_info,db=plant_db):
     #Write data to the database table
     
+    # TEMPORARY!!! DELETE LATER
+    #log_locally(i=write_info, f=table)
+    
     #build SQL command string
     sql=build_SQL_insert(table)
     

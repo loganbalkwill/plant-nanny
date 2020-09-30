@@ -1,4 +1,5 @@
 from datetime import datetime
+import ast
 import os, sys
 sys.path.insert(0, '..')
 
@@ -47,9 +48,17 @@ def log_locally(info, filename, folder_path=settings.log_directory, filetype=set
     if os.path.exists(folder_path)==False:
         os.mkdir(folder_path)
     
+    #Build string
+    msg=''
+    for item in info:
+        if item==info[0]:
+            msg+=str(item)
+        else:
+            msg+= '; ' + item
+    
     #Write information to file
     f=open(fullpath,"a")
-    f.write(str(info) + '\n')
+    f.write(msg + '\n')
     f.close()
 
 def local_logs_exist():
@@ -78,6 +87,46 @@ def local_logs_exist():
     return count, msg
 
 
+def upload_local_logs():
+#attempt to upload queued logs to database
+    log_info(log_level = 'p', message = "Attempting to upload queued logs....")
+
+    directory=settings.log_directory
+    logfiles=0
+    count=0
+    logs_success=0
+    logs_failed=0
+    
+    #loop through log files
+    for filename in os.listdir(directory):
+        if filename.endswith(".txt") or filename.endswith(".csv"):
+            logfiles+=1
+            table_name=os.path.splitext(filename)[0]
+            
+            #Below section opens file (read) and stores info in variable
+            #Next, the file is opened (write) to overwrite the file
+            #    ONLY info that couldn't be uploaded
+            with open(directory+filename,"r") as f:
+                #loop through log lines
+                lines = f.readlines()
+            with open(directory+filename, "w") as f:
+                for line in lines:
+                    count+= 1
+                    
+                    #extract information
+                    line=str(line)
+                    list_str=line.rstrip()
+                    lst=list_str.split('; ')
+                    
+                    #attempt to upload to db
+                    try:
+                        db.write_to_db(table=table_name,
+                                       write_info=lst)
+                        
+                    except:
+                        f.write(line)
+                    
+                
 
 if __name__=="__main__":
     local_logs_exist()
