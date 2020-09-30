@@ -11,7 +11,7 @@ password='mainuser'
 phpmyadmin_password='Balk45610'
 
 #Interval for checking for new information
-refresh_mins=10
+refresh_mins=2
 
 #Local Logging Information:
 #(only used to store data if MySQL database is unavailable)
