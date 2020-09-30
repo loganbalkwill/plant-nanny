@@ -32,7 +32,7 @@ def log_action(event,result, additional_info=''):
 def log_info(log_level,message):
     
     if log_level=='p':
-        print(message)
+        print(str(datetime.now()) + ': ' + message)
     if log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])

@@ -6,7 +6,7 @@ sys.path.insert(0, '..')
 import settings
 
 def get_loop_frequency(numlist):
-    #returns the frequency of looping in the main procedure
+    #returns the frequency of looping in the main procedure (minutes)
     
     #default returns 1 minute
     GCD=settings.read_frequency_mins
