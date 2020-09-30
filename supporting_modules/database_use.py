@@ -138,5 +138,5 @@ def log_locally(i, f):
     logging.log_locally(info=i,filename=f)
 
 if __name__=="__main__":
-    logging.log_info(severity='p', msg="Attempting to write to DB")
+    log_information(severity='p', msg="Attempting to write to DB")
     write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','1',20,390])
