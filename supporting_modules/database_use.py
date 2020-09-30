@@ -18,10 +18,10 @@ try:
                                      password=s.password,
                                      database=s.database_name)
     
-    print("connection to database '%s' was successfull" % s.database_name)
+    logger.log_info(log_level='p', message=("connection to database '%s' was successfull" % s.database_name))
     
 except:
-    print("FAILED to connect to database '%s'" % s.database_name) 
+    logger.log_info(log_level='p', message=("FAILED to connect to database '%s'" % s.database_name)) 
 
 
 def write_to_db(table, write_info,db=plant_db):
@@ -41,7 +41,7 @@ def write_to_db(table, write_info,db=plant_db):
     
     except:
         #failed to write to the database; store info locally
-        print("Failed to write to database")
+        logger.log_info(log_level='p', message="Failed to write to database")
         logger.log_locally(info=write_info, filename=table)
         
 
@@ -125,5 +125,5 @@ def build_plant_devices_list():
     return device_list
 
 if __name__=="__main__":
-    print("Attempting to write to DB")
+    logger.log_info(log_level='p', message="Attempting to write to DB")
     write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','1',20,390])
