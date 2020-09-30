@@ -90,14 +90,19 @@ def main():
             action_freq=looping.condition_frequency(action_freq)
             
             #Check if interval has elapsed
-            if(loopcounter%action_freq==0):
+            if(loopcounter % action_freq==0):
                 #Yes; Perform Action
                 try:
                     actions.perform_action(action)
                     logging.log_action(action,"success")
                 except:
                     logging.log_action(action,"failure")
-            
+        
+        #Check if system check interval has elapsed
+        if (loopcounter % s.refresh_mins == 0):
+            startup() #yep; run the startup procedure again
+        
+        
         #Increment interval counter
         try:
             loopcounter+=1
