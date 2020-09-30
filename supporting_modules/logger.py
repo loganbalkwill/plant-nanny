@@ -34,7 +34,7 @@ def log_info(log_level,message):
     if log_level=='p':
         dt=datetime.now()
         print('(' + dt.strftime("%m/%d/%Y, %H:%M:%S") + '): ' + message)
-    if log_level in settings.log_levels:
+    elif log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
 

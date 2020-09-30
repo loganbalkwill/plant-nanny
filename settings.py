@@ -24,7 +24,7 @@ log_levels=(
     'w', #warning
     #'d', #debugging
     's', #severe
-    'p', #print (prints to the shell; not logged into database)
+    #'p', #print (prints to the shell; not logged into database) DO NOT UNCOMMENT!!!
     )
     
 #Instrument Settings

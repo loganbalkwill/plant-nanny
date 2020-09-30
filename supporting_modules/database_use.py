@@ -37,7 +37,7 @@ def write_to_db(table, write_info,db=plant_db):
         
         db.commit()
         
-        print(cursor.rowcount, "record inserted to %s table" % table)
+        logger.log_info(log_level='p', message=str(cursor.rowcount) + (" record inserted to %s table" % table))
     
     except:
         #failed to write to the database; store info locally
