@@ -46,21 +46,21 @@ GENERAL ALGORITHM:
 #########################
 ### STARTUP PROCEDURE ###
 #########################
-
-#Check Peripherals
+def startup():
+    #Check Peripherals
     #Build list of sensors in-use
-i2c_available=device_info.find_i2c_devices()
-plant_devices_list=db.build_plant_devices_list()
-action_freq_list=looping.get_action_freqs(plant_devices_list)
+    i2c_available=device_info.find_i2c_devices()
+    plant_devices_list=db.build_plant_devices_list()
+    action_freq_list=looping.get_action_freqs(plant_devices_list)
 
-    #Calculate looping frequency
-loop_freq=looping.get_loop_frequency(action_freq_list)
+        #Calculate looping frequency
+    loop_freq=looping.get_loop_frequency(action_freq_list)
 
-#Check Database Connection
-    #Check for queued logs
-logs_queued=logging.local_logs_exist()
+    #Check Database Connection
+        #Check for queued logs
+    logs_queued=logging.local_logs_exist()
 
-#Check Emailing Functionality
+    #Check Emailing Functionality
 
 
 
@@ -101,4 +101,5 @@ def main():
         
 
 if __name__=='__main__':
+    startup()
     main()
