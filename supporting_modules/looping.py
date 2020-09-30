@@ -11,6 +11,10 @@ def get_loop_frequency(numlist):
     #default returns 1 minute
     GCD=settings.read_frequency_mins
     reclist=[]
+    
+    #include startup procedure refresh frequency in numlist
+    numlist.append(settings.refresh_mins)
+    
     #if any of the numbers provided are less than 1 minute (non-negative),
     #a greatest common divisor (GCD) is calculated
     
