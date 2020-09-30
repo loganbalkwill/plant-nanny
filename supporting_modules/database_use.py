@@ -5,7 +5,9 @@ sys.path.insert(0, '..')
 
 import mysql.connector
 import settings as s
-import supporting_modules.logger as logger
+
+#The below import statement is used in the log_information function
+#import supporting_modules.logger as logging
 
 
 """ TODO
@@ -18,10 +20,12 @@ try:
                                      password=s.password,
                                      database=s.database_name)
     
-    logger.log_info(log_level='p', message=("connection to database '%s' was successfull" % s.database_name))
+    log_information(severity='p',
+                    msg=("connection to database '%s' was successfull" % s.database_name))
     
 except:
-    logger.log_info(log_level='p', message=("FAILED to connect to database '%s'" % s.database_name)) 
+    log_information(severity='p',
+                    msg=("FAILED to connect to database '%s'" % s.database_name)) 
 
 
 def write_to_db(table, write_info,db=plant_db):
@@ -37,12 +41,12 @@ def write_to_db(table, write_info,db=plant_db):
         
         db.commit()
         
-        logger.log_info(log_level='p', message=str(cursor.rowcount) + (" record inserted to %s table" % table))
+        log_information(severity='p', msg=str(cursor.rowcount) + (" record inserted to %s table" % table))
     
     except:
         #failed to write to the database; store info locally
-        logger.log_info(log_level='p', message="Failed to write to database")
-        logger.log_locally(info=write_info, filename=table)
+        log_information(severity='p', msg="Failed to write to database")
+        log_locally(i=write_info, f=table)
         
 
 def build_SQL_insert(table_name):
@@ -124,6 +128,15 @@ def build_plant_devices_list():
     
     return device_list
 
+
+def log_information(severity, msg):
+    import supporting_modules.logger as logging
+    logging.log_info(log_level=severity, message=msg)
+    
+def log_locally(i, f):
+    import supporting_modules.logger as logging
+    logging.log_locally(info=i,filename=f)
+
 if __name__=="__main__":
-    logger.log_info(log_level='p', message="Attempting to write to DB")
+    logging.log_info(severity='p', msg="Attempting to write to DB")
     write_to_db(db=plant_db,table='soilsensor_trans',write_info=['2020-08-31','1',20,390])

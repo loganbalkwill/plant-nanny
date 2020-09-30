@@ -28,7 +28,6 @@ def log_action(event,result, additional_info=''):
     log_info(severity,message)
     
     
-    
 def log_info(log_level,message):
     
     if log_level=='p':
