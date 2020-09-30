@@ -47,7 +47,7 @@ GENERAL ALGORITHM:
 ### STARTUP PROCEDURE ###
 #########################
 
-#Initialize variables
+#Initialize Global Variables
 i2c_available=[]
 plant_devices_list=[]
 action_freq_list=[]
@@ -55,6 +55,9 @@ loop_freq=s.read_frequency_mins
 logs_queued=0
 
 def startup():
+    #Acknowledge global variables
+    global i2c_available, plant_devices_list, action_freq_list, loop_freq, logs_queued
+    
     #Check Peripherals
     #Build list of sensors in-use
     i2c_available=device_info.find_i2c_devices()
