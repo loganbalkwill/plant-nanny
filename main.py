@@ -76,6 +76,9 @@ def startup():
         logging.log_info(log_level='i', message=msg)
     else:
         logging.log_info(log_level='p',message=msg)
+    
+    if logs_queued > 0:
+        logging.upload_logs()
 
 
     #Check Emailing Functionality
