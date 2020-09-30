@@ -121,11 +121,16 @@ def upload_local_logs():
                     #attempt to upload to db
                     try:
                         db.write_to_db(table=table_name,
-                                       write_info=lst)
-                        
+                                       write_info=lst,
+                                       log_local=False)
+                        logs_success+=1
                     except:
                         f.write(line)
-                    
+                        logs_failed+=1
+    
+    #Build result message
+    msg='Results of re-uploading queued logs: %s successful,  %s failed (%s files involved)' % (logs_success, logs_failed, logfiles)                   
+    log_info(log_level='p',message=msg)  
                 
 
 if __name__=="__main__":

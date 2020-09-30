@@ -38,7 +38,7 @@ except:
                     msg=("FAILED to connect to database '%s'" % s.database_name)) 
 
 
-def write_to_db(table, write_info,db=plant_db, log_locally=True):
+def write_to_db(table, write_info,db=plant_db, log_local=True):
     #Write data to the database table
     
     # TEMPORARY!!! DELETE LATER
@@ -59,7 +59,9 @@ def write_to_db(table, write_info,db=plant_db, log_locally=True):
     except:
         #failed to write to the database; store info locally
         log_information(severity='p', msg="Failed to write to database")
-        log_locally(i=write_info, f=table)
+        if log_local==True:
+            log_locally(i=write_info, f=table)
+        else: raise Exception("Information not logged!!!")
         
 
 def build_SQL_insert(table_name):
