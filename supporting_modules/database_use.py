@@ -1,26 +1,27 @@
 #Created by Logan Balkwill
 #Created on 8-30-2020
 import sys
+from importlib import reload
 sys.path.insert(0, '..')
 
 import mysql.connector
 import settings as s
 
 #The below import statement is used in the log_information function
-#import supporting_modules.logger as logging
-
+import supporting_modules.logger as logger
+reload(logger)
 
 """ TODO
         -Logging database actions
 """
 
 def log_information(severity, msg):
-    import supporting_modules.logger as logging
-    logging.log_info(log_level=severity, message=msg)
+    #import supporting_modules.logger as logger
+    logger.log_info(log_level=severity, message=msg)
     
 def log_locally(i, f):
-    import supporting_modules.logger as logging
-    logging.log_locally(info=i,filename=f)
+    #import supporting_modules.logger as logger
+    logger.log_locally(info=i,filename=f)
     
     
 try:
