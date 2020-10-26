@@ -54,7 +54,7 @@ def perform_action(action):
             time.sleep(1)
     
         soil_temp=soil_temp/x
-        soil_moisture=soil_moisture/5
+        soil_moisture=soil_moisture/x
         
         database_use.write_to_db(table='soilsensor_trans',
                                  write_info=[datetime.now(),
