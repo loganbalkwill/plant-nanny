@@ -50,6 +50,7 @@ def perform_action(action):
             soil_moisture=soil_moisture + sensors.get_soil_moisture()
         
             i+=1
+            time.sleep(1)
         
         soil_temp=soil_temp/5
         soil_moisture=soil_moisture/5
