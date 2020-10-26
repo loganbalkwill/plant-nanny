@@ -8,11 +8,11 @@ from board import SCL, SDA
 import busio
 
 from adafruit_seesaw.seesaw import Seesaw
-import settings
+#import settings
 
 i2c_bus = busio.I2C(SCL, SDA)
 
-ss = Seesaw(i2c_bus, addr=settings.addr_sensor_soil)
+ss = Seesaw(i2c_bus, addr=0X36)
 
 
 def get_moisure():
