@@ -40,19 +40,20 @@ def perform_action(action):
     #decide what action to perform
     if device_name=='STEMMA Soil Sensor':
         #retrieve values and insert record into database
-        #AVERAGE 5 READINGS
+        #AVERAGE x READINGS
+        x=10
         i=0
         soil_temp=0
         soil_moisture=0
         
-        while i<5:
+        while i<x:
             soil_temp=soil_temp + sensors.get_soil_temp()
             soil_moisture=soil_moisture + sensors.get_soil_moisture()
         
             i+=1
             time.sleep(1)
-        
-        soil_temp=soil_temp/5
+    
+        soil_temp=soil_temp/x
         soil_moisture=soil_moisture/5
         
         database_use.write_to_db(table='soilsensor_trans',
