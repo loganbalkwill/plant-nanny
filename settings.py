@@ -42,5 +42,5 @@ image_filetype='.jpg'
 
 
 #Graphics Information
-graphics_directory='/home/pi/Documents/Plant_Nanny/Charts/'
+graphics_directory='/home/pi/Documents/Plant_Nanny/Graphics/'
 graphics_filetype='.png'

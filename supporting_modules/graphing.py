@@ -9,6 +9,10 @@ import settings as s
 
 axis_intervals_hours=[0,3,6,9,12,15,18,21,24]
 
+#Storing information
+save_folder=s.graphics_directory
+save_filetype=s.graphics_filetype
+
 def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     times, temps = get_airtemp_data(plantid=plant_id, input_date=target_date)
     plt.plot(times, temps)
@@ -16,7 +20,8 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Temperature')
-    plt.show()
+    plt.savefig(save_folder + target_date +'__Air-Temp' + save_filetype)
+    #plt.show()
     
 def get_airtemp_data(plantid, input_date=str(dt.date.today())):
     #returns datasets for airtemp data for a given date, plant_id
