@@ -40,3 +40,7 @@ addr_sensor_gas=0X58
 image_directory='/home/pi/Documents/Plant_Nanny/Plant-Photos/'
 image_filetype='.jpg'
 
+
+#Graphics Information
+graphics_directory='/home/pi/Documents/Plant_Nanny/Charts/'
+graphics_filetype='.png'
