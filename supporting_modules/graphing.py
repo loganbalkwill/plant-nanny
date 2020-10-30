@@ -5,13 +5,16 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 import supporting_modules.database_use as db
+import settings as s
+
+axis_intervals_hours=[0,3,6,9,12,15,18,21,24]
 
 def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     times, temps = get_airtemp_data(plantid=plant_id, input_date=target_date)
     plt.plot(times, temps)
     plt.ylabel('Degrees Celcius')
     plt.xlabel(target_date)
-    plt.xlim(0,24)
+    plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Temperature')
     plt.show()
     
