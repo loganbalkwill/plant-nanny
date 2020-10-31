@@ -14,7 +14,11 @@ save_folder=s.graphics_directory
 save_filetype=s.graphics_filetype
 
 def airtemp_graph(plant_id, target_date=str(dt.date.today())):
-    times, temps = get_airtemp_data(plantid=plant_id, input_date=target_date)
+    SQL="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
+
+    times, temps = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
+    times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
+    
     plt.plot(times, temps)
     plt.ylabel('Degrees Celcius')
     plt.xlabel(target_date)
@@ -24,7 +28,11 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     #plt.show()
 
 def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
-    times, humidity = get_airhumidity_data(plantid=plant_id, input_date=target_date)
+    SQL="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
+
+    times, humidity = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
+    times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
+    
     plt.plot(times, humidity)
     plt.ylabel('Air Humidity (%)')
     plt.xlabel(target_date)
@@ -33,11 +41,10 @@ def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     #plt.savefig(save_folder + target_date +'__Air-Humidity' + save_filetype)
     plt.show()
     
-def get_airtemp_data(plantid, input_date=str(dt.date.today())):
-    #returns datasets for airtemp data for a given date, plant_id
-    
-    SQL_base="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
 
+def get_plot_data(plantid, SQL_base, input_date=str(dt.date.today())):
+    #returns datasets x,y data for a given date, plant_id, SQL string
+    
     #validate date input
     try:
         date1=dt.date.fromisoformat(input_date)
@@ -52,45 +59,27 @@ def get_airtemp_data(plantid, input_date=str(dt.date.today())):
     data = db.retrieve_data(sql_query=SQL_complete)
 
     #unpack data
-    times=[]
-    airtemp=[]
+    x=[]
+    y=[]
     
     for i in data:
-        times.append(i[0].seconds/3600)
-        airtemp.append(i[1])
+        x.append(i[0])
+        y.append(i[1])
     
-    return times, airtemp
+    return x, y
 
-def get_airhumidity_data(plantid, input_date=str(dt.date.today())):
-    #returns datasets for airtemp data for a given date, plant_id
+def format_data(dat, conversion):
+    dat_formatted=[]
     
-    SQL_base="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
-
-    #validate date input
-    try:
-        date1=dt.date.fromisoformat(input_date)
-    except:
-        raise Exception("Date value '%s' supplied is not in a recognizable date format" % input_date)
+    for i in dat:
+        if conversion=='datetime-to-timestamp_decimal':
+            dat_formatted.append((i.seconds)/3600)
+        else:
+            raise Exception("Datatype '%s' could not be handled properly" % datatype)
     
-    #build query parameters
-    date2 = date1 + dt.timedelta(days=1)
-    SQL_complete= (SQL_base % (date1, date2, plantid))
-    
-    #run query
-    data = db.retrieve_data(sql_query=SQL_complete)
-
-    #unpack data
-    times=[]
-    airhumidity=[]
-    
-    for i in data:
-        times.append(i[0].seconds/3600)
-        airhumidity.append(i[1])
-    
-    return times, airhumidity
+    return dat_formatted
 
 if __name__=='__main__':
-    #t, a = get_airtemp_data(plantid=2)
-    
-    #airtemp_graph(plant_id=2)
-    airhumidity_graph(plant_id=2, target_date='2020-10-25')
+        
+    airtemp_graph(plant_id=2)
+    #airhumidity_graph(plant_id=2, target_date='2020-10-25')
