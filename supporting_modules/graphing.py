@@ -33,6 +33,10 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     times, temps = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
     times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
     
+    #Clear any pre-existing plots
+    plt.clf()
+    
+    #Generate new plot
     plt.plot(times, temps)
     plt.ylabel('Degrees Celcius')
     plt.xlabel(target_date)
@@ -47,6 +51,10 @@ def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     times, humidity = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
     times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
     
+    #Clear any pre-existing plots
+    plt.clf()
+    
+    #Generate new plot
     plt.plot(times, humidity)
     plt.ylabel('Air Humidity (%)')
     plt.xlabel(target_date)
