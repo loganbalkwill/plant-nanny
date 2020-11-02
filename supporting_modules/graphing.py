@@ -7,6 +7,20 @@ import numpy as np
 import supporting_modules.database_use as db
 import settings as s
 
+
+"""
+TODO:
+    Add proper logging
+    SQL libraries for easier lookup
+    Expand dataset formatter
+    Remaining graphs, SQL
+    Standardizing graphs
+        create graph class?
+    
+    Bring into main program
+        incorporate as an action???
+"""
+
 axis_intervals_hours=[0,3,6,9,12,15,18,21,24]
 
 #Storing information
@@ -38,8 +52,8 @@ def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Humidity')
-    #plt.savefig(save_folder + target_date +'__Air-Humidity' + save_filetype)
-    plt.show()
+    plt.savefig(save_folder + target_date +'__Air-Humidity' + save_filetype)
+    #plt.show()
     
 
 def get_plot_data(plantid, SQL_base, input_date=str(dt.date.today())):
@@ -82,4 +96,4 @@ def format_data(dat, conversion):
 if __name__=='__main__':
         
     airtemp_graph(plant_id=2)
-    #airhumidity_graph(plant_id=2, target_date='2020-10-25')
+    airhumidity_graph(plant_id=2)
