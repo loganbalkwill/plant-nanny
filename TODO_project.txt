@@ -9,3 +9,4 @@ TODO:
     - write "Docs" support files
     - write test scripts
     - write dictionaries in settings.py (or build dictionaries from database???)
+    - simplify & standardize graph configurations
