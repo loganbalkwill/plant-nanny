@@ -8,4 +8,7 @@ sql_insert={
             'log_trans'         :   "INSERT INTO `log_trans` (`record_id`, `datetime`, `log_type`, `log_message`) VALUES (NULL, %s, %s, %s)"
 }           
 
+if __name__=="__main__":
+    x=sql_insert['photo_trans']
 
+    print(x)
