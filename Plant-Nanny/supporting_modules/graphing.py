@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import supporting_modules.database_use as db
 import settings as s
+import dictionaries
 
 
 """
 TODO:
     Add proper logging
-    SQL libraries for easier lookup
     Expand dataset formatter
     Remaining graphs, SQL
     Standardizing graphs
@@ -19,16 +19,22 @@ TODO:
     
     Bring into main program
         incorporate as an action???
+
+DONE:
+    SQL libraries for easier lookup
 """
 
 axis_intervals_hours=[0,3,6,9,12,15,18,21,24]
+
+#Retrieve Dictionaries
+sql_select=dictionaries.sql_select.copy()
 
 #Storing information
 save_folder=s.graphics_directory
 save_filetype=s.graphics_filetype
 
 def airtemp_graph(plant_id, target_date=str(dt.date.today())):
-    SQL="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
+    SQL=sql_select['air_temp']
 
     times, temps = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
     times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
@@ -46,7 +52,7 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     #plt.show()
 
 def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
-    SQL="SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
+    SQL=sql_select['air_humidity']
 
     times, humidity = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
     times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
