@@ -1,4 +1,7 @@
 
+"""Database-Related Dictionaries:"""
+
+#Writing information to database
 sql_insert={
             'soilsensor_trans'  :   "INSERT INTO soilsensor_trans (DateTime, plant_id, SoilTemp_DegC, SoilMoisture_val) VALUES (%s, %s, %s, %s)",
             'gassensor_trans'   :   "INSERT INTO `gassensor_trans` (`record_id`, `DateTime`, `plant_id`, `eCO2_ppm`, `TVOC_ppb`) VALUES (NULL, %s, %s, %s, %s)",
@@ -8,7 +11,14 @@ sql_insert={
             'log_trans'         :   "INSERT INTO `log_trans` (`record_id`, `datetime`, `log_type`, `log_message`) VALUES (NULL, %s, %s, %s)"
 }           
 
-if __name__=="__main__":
-    x=sql_insert['photo_trans']
+#Retrieving information from database
+sql_select={
+            'air_temp'      :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'",
+            'air_humidity'  :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.plant_id= '%s'"
+}
 
+
+
+if __name__=="__main__":
+    x=sql_select['air_humidity']
     print(x)
