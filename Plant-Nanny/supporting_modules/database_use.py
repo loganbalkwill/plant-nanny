@@ -27,7 +27,9 @@ def log_locally(i, f):
 
 #Import SQL dictionaries:
 sql_insert=dictionaries.sql_insert.copy()
+sql_select=dictionaries.sql_select.copy()
 
+#Establish connection to database
 try:
     plant_db=mysql.connector.connect(host=s.host,
                                      user=s.username,
@@ -44,9 +46,6 @@ except:
 
 def write_to_db(table, write_info,db=plant_db, log_local=True):
     #Write data to the database table
-    
-    # TEMPORARY!!! DELETE LATER
-    #log_locally(i=write_info, f=table)
     
     #build SQL command string
     sql=build_SQL_insert(table)
@@ -75,13 +74,13 @@ def build_SQL_insert(table_name):
         return sql_insert[table_name]
     else:
         return ''
-        
+
 
 def get_sensor_list(additional_sql):
     #returns list of active sensors
     
     #build SQL query string
-    sql= "SELECT * FROM sensors"
+    sql= sql_select['sensors']
     
     if len(additional_sql)>1:
         sql=sql + " WHERE " + additional_sql 
@@ -99,7 +98,7 @@ def get_sensor_frequencies(additional_sql):
     #returns list of sensor read frequencies
     
     #build SQL query string
-    sql= "SELECT read_frequency_min FROM sensors"
+    sql= sql_select['sensor_freq']
     
     if len(additional_sql)>1:
         sql=sql + " WHERE " + additional_sql 
@@ -115,13 +114,12 @@ def get_sensor_frequencies(additional_sql):
     return sensor_list
 
 def build_plant_devices_list():
-    #used to build the main list of plant devices and characteristics used in program
-    
+    #Used to build the main list of plant devices and characteristics used in program
     #Output tuple as: PlantID, Plant Name, Device_ID, Device Name, Action_Frequency_Min
     
-    #Build SQL string
-    sql="SELECT DISTINCT D_PD.id_plant AS Plant_ID, D_P.name AS Plant_Name, D_PD.id_device AS Device_ID, D_D.model AS Device_Name, COALESCE(D_PD.action_freq_mins, D_D.default_action_freq_mins) AS Action_Frequency FROM def_plant_devices AS D_PD INNER JOIN def_plants AS D_P ON D_PD.id_plant=D_P.id INNER JOIN def_devices AS D_D ON D_PD.id_device=D_D.id WHERE D_P.active=1 AND D_D.supported=1 AND D_PD.active=1"
-    
+    #Get SQL string
+    sql=sql_select['plant_devices'] 
+
     #execute query
     mycursor=plant_db.cursor()
     mycursor.execute(sql)
