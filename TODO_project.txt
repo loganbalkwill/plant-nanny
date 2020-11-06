@@ -8,5 +8,8 @@ TODO:
     - preserving website files in repository
     - write "Docs" support files
     - write test scripts
-    - write dictionaries in settings.py (or build dictionaries from database???)
     - simplify & standardize graph configurations
+
+DONE:
+    2020-11-06
+        - write dictionaries in settings.py (or build dictionaries from database???)
