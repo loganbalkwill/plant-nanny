@@ -5,3 +5,6 @@ This file is meant to outline the general project "to do" list
 TODO:
     - build requirements.txt file for project dependencies
     - database setup script if database doesn't already exist (typically for initial setup)
+    - preserving website files in repository
+    - write "Docs" support files
+    - write test scripts
