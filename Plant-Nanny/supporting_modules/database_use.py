@@ -14,6 +14,7 @@ reload(logger)
 
 """ TODO
         -Logging database actions
+        -Clean up module (lots of redundant functions)
 """
 
 def log_information(severity, msg):
