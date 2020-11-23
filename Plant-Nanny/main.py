@@ -7,7 +7,7 @@
 
 __author__    = "Logan Balkwill"
 __date__      = "September 10, 2020"
-__version__   = "1.0.1"
+__version__   = "1.1.1"
 __maintainer__= "Logan Balkwill"
 __email__     = "lgb0020@gmail.com"
 
@@ -38,6 +38,12 @@ GENERAL ALGORITHM:
         -PERFORM ACTION(S) AS REQUIRED:
             -PERFORM PHYSICAL ACTION (I.E. WATER)
             -NOTIFY SUBSCRIBER(S) VIA EMAIL
+
+-----------------------------------------------------------------
+
+VERSIONING:
+    1.0.1   -   I AM BORN
+    1.1.1   -   Major code restructuring (no significant program impact)
 """
 
 #TODO: find good way of resetting the loop counter
