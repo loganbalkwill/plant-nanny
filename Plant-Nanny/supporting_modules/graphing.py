@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import supporting_modules.database_use as db
 import settings as s
-import dictionaries
+import supporting_modules.dictionaries as dictionaries
 
 
 """
