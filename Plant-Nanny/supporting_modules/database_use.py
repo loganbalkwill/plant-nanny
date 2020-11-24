@@ -6,7 +6,7 @@ sys.path.insert(0, '..')
 
 import mysql.connector
 import settings as s
-import dictionaries
+import supporting_modules.dictionaries as dictionaries
 
 #The below import statement is used in the log_information function
 import supporting_modules.logger as logger
