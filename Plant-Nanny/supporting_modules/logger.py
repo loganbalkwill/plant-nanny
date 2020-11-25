@@ -29,11 +29,14 @@ def log_action(event,result, additional_info=''):
     log_info(severity,message)
     
     
-def log_info(log_level,message):
+def log_info(log_level,message, filename_log='log_trans', local=False):
     
     if log_level=='p':
         dt=datetime.now()
         print('(' + dt.strftime("%m/%d/%Y, %H:%M:%S") + '): ' + message)
+    elif local==True:
+        msg=[dt.strftime("%m/%d/%Y, %H:%M:%S"), log_level, message]
+        log_locally(info=msg, filename=filename_log)
     elif log_level in settings.log_levels:
         db.write_to_db(table='log_trans',
                                  write_info=[datetime.now(), log_level, message])
