@@ -17,9 +17,9 @@ reload(logger)
         -Clean up module (lots of redundant functions)
 """
 
-def log_information(severity, msg):
+def log_information(severity, msg,log_local=False):
     #import supporting_modules.logger as logger
-    logger.log_info(log_level=severity, message=msg)
+    logger.log_info(log_level=severity, message=msg, local=log_local)
     
 def log_locally(i, f):
     #import supporting_modules.logger as logger
@@ -66,7 +66,34 @@ def write_to_db(table, write_info,db=plant_db, log_local=True):
         if log_local==True:
             log_locally(i=write_info, f=table)
         else: raise Exception("Information not logged!!!")
+
+def query_db(sql_string):
+    #Handles database queries; returns query results
+    results=[]
+
+    try:
+        #Validate the query string
+        if (sql_string.find('SELECT')==-1) and (sql_string.find('select')==-1):
+            #INVALID!! the provided string may be a 'UPDATE','DELETE', or other style string
+            raise Exception('Error retrieving info from database... SQL string does not contain a SELECT statement!!')
+
+        #Run Query
+        mycursor=plant_db.cursor()
+        mycursor.execute(sql_string)
         
+        results=mycursor.fetchall()
+        mycursor.close()
+
+        return results
+
+    except Exception as err:
+        #Could not process query; Log error info locally
+
+        log_information(severity='p', msg="Failed to query database!!")
+        log_information(severity='s', msg=err, log_local=True)
+
+        return results
+
 
 def build_SQL_insert(table_name):
     #returns sql string of command
@@ -87,13 +114,7 @@ def get_sensor_list(additional_sql):
         sql=sql + " WHERE " + additional_sql 
         
     #execute query
-    mycursor=plant_db.cursor()
-    mycursor.execute(sql)
-    
-    sensor_list=mycursor.fetchall()
-    mycursor.close()
-    
-    return sensor_list
+    return query_db(sql_string=sql)
 
 def get_sensor_frequencies(additional_sql):
     #returns list of sensor read frequencies
@@ -105,14 +126,8 @@ def get_sensor_frequencies(additional_sql):
         sql=sql + " WHERE " + additional_sql 
         
     #execute query
-    mycursor=plant_db.cursor()
-    mycursor.execute(sql)
-    
-    sensor_list=mycursor.fetchall()
-        
-    mycursor.close()
-    
-    return sensor_list
+    return query_db(sql_string=sql)
+
 
 def build_plant_devices_list():
     #Used to build the main list of plant devices and characteristics used in program
@@ -122,32 +137,8 @@ def build_plant_devices_list():
     sql=sql_select['plant_devices'] 
 
     #execute query
-    mycursor=plant_db.cursor()
-    mycursor.execute(sql)
-    
-    device_list=mycursor.fetchall()
-        
-    mycursor.close()
-    
-    return device_list
+    return query_db(sql_string=sql)
 
-def retrieve_data(sql_query, db=plant_db):
-    #generic function to run sql_query and return result object
-    
-    #Validate the query string
-    if (sql_query.find('SELECT')==-1) and (sql_query.find('select')==-1):
-        #INVALID!! the provided string may be a 'UPDATE','DELETE', or other style string
-        raise Exception('Error retrieving info from database... SQL string does not contain a SELECT statement!!')
-    
-    try:
-        mycursor=db.cursor()
-        mycursor.execute(sql_query)
-        query_results=mycursor.fetchall()
-        mycursor.close() 
-    except:
-        raise Exception('Unable to run SQL query. Verify the SQL string and database connection information')
-   
-    return query_results
 
 if __name__=="__main__":
     log_information(severity='p', msg="Attempting to write to DB")
