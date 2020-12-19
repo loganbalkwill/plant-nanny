@@ -19,7 +19,7 @@ def get_photos_path(plant_id, plant_name):
     sub_path=str(plant_id) + "|" + str(plant_name)
     now=datetime.now()
     filename=str(now.strftime("%m-%d-%Y %H:%M:%S"))
-    filetype=settings.image_filetype
+    filetype=settings.image_filetypels
     
     fullpath=path+ sub_path + '/' + filename + filetype
     
@@ -41,7 +41,7 @@ def perform_action(action):
     if device_name=='STEMMA Soil Sensor':
         #retrieve values and insert record into database
         #AVERAGE x READINGS
-        x=10
+        x=30
         i=0
         soil_temp=0
         soil_moisture=0
