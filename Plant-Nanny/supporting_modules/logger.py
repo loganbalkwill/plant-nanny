@@ -30,9 +30,9 @@ def log_action(event,result, additional_info=''):
     
     
 def log_info(log_level,message, filename_log='log_trans', local=False):
+    dt=datetime.now()
     
     if log_level=='p':
-        dt=datetime.now()
         print('(' + dt.strftime("%m/%d/%Y, %H:%M:%S") + '): ' + message)
     elif local==True:
         msg=[dt.strftime("%m/%d/%Y, %H:%M:%S"), log_level, message]
