@@ -7,7 +7,7 @@
 
 __author__    = "Logan Balkwill"
 __date__      = "September 10, 2020"
-__version__   = "1.1.1"
+__version__   = "1.2.1"
 __maintainer__= "Logan Balkwill"
 __email__     = "lgb0020@gmail.com"
 
@@ -42,8 +42,9 @@ GENERAL ALGORITHM:
 -----------------------------------------------------------------
 
 VERSIONING:
-    1.0.1   -   I AM BORN
-    1.1.1   -   Major code restructuring (no significant program impact)
+    1.0.1                   -   I AM BORN
+    1.1.1                   -   Major code restructuring (no significant program impact)
+    1.2.1   (2020-12-18)    -   Patches to fit new db structure 
 """
 
 #TODO: find good way of resetting the loop counter
@@ -69,6 +70,7 @@ def startup():
     i2c_available=device_info.find_i2c_devices()
     plant_devices_list=db.build_plant_devices_list()
     action_freq_list=looping.get_action_freqs(plant_devices_list)
+    
 
         #Calculate looping frequency
     loop_freq=looping.get_loop_frequency(action_freq_list)
@@ -85,7 +87,6 @@ def startup():
     
     if logs_queued > 0:
         logging.upload_local_logs()
-
 
     #Check Emailing Functionality
 
