@@ -13,11 +13,11 @@ sql_insert={
 
 #Retrieving information from database
 sql_select={
-    'air_temp'      :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.room_id= '%s'",
-    'air_humidity'  :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.room_id= '%s'",
-    'sensors'       :   "SELECT * FROM sensors",
-    'sensor_freq'   :   "SELECT read_frequency_min FROM sensors",
-    'device_assignments' :   "SELECT DISTINCT D_PD.id_plant AS Plant_ID, D_P.name AS Plant_Name, D_PD.id_device AS Device_ID, D_D.model AS Device_Name, COALESCE(D_PD.action_freq_mins, D_D.default_action_freq_mins) AS Action_Frequency FROM def_device_assignments AS D_PD INNER JOIN def_plants AS D_P ON D_PD.id_plant=D_P.id INNER JOIN def_devices AS D_D ON D_PD.id_device=D_D.id WHERE D_P.active=1 AND D_D.supported=1 AND D_PD.active=1"
+    'air_temp'          :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirTemp_DegC FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.room_id= '%s'",
+    'air_humidity'      :   "SELECT CAST(a.DateTime as Time) as Timestamp, a.AirHumidity_percent FROM airsensor_trans a WHERE a.DateTime >= '%s' AND a.DateTime < '%s' AND a.room_id= '%s'",
+    'sensors'           :   "SELECT * FROM sensors",
+    'sensor_freq'       :   "SELECT read_frequency_min FROM sensors",
+    'device_assignments':   "SELECT DISTINCT COALESCE(D_PD.id_plant, D_PD.id_room) AS Plant_ID, D_P.name AS Plant_Name, D_PD.id_device AS Device_ID, D_D.model AS Device_Name, COALESCE(D_PD.action_freq_mins, D_D.default_action_freq_mins) AS Action_Frequency FROM def_device_assignments AS D_PD INNER JOIN def_plants AS D_P ON D_PD.id_plant=D_P.id INNER JOIN def_devices AS D_D ON D_PD.id_device=D_D.id WHERE D_P.active=1 AND D_D.supported=1 AND D_PD.active=1"
 }
 
 """ Error Handling Dictionaries:    """
