@@ -134,7 +134,7 @@ def build_plant_devices_list():
     #Output tuple as: PlantID, Plant Name, Device_ID, Device Name, Action_Frequency_Min
     
     #Get SQL string
-    sql=sql_select['plant_devices'] 
+    sql=sql_select['device_assignments'] 
 
     #execute query
     return query_db(sql_string=sql)
