@@ -67,12 +67,10 @@ def startup():
     
     #Check Peripherals
     #Build list of sensors in-use
-    logging.log_info(log_level='p',message='Performing startup procedure...')
     i2c_available=device_info.find_i2c_devices()
     plant_devices_list=db.build_plant_devices_list()
     action_freq_list=looping.get_action_freqs(plant_devices_list)
     
-    logging.log_info(log_level='p',message='...')
 
         #Calculate looping frequency
     loop_freq=looping.get_loop_frequency(action_freq_list)
@@ -90,8 +88,6 @@ def startup():
     if logs_queued > 0:
         logging.upload_local_logs()
 
-    
-    logging.log_info(log_level='p',message='... complete!')
     #Check Emailing Functionality
 
 
