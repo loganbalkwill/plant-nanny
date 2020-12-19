@@ -291,7 +291,7 @@ function chart_latest_soil_moisture( $atts = '' ){
       'plant_id' => '', 
       'datetime_end' => '', 
       'lookback_period' => '24', 
-      'avg_rows' => '30',
+      'avg_rows' => '10',
       'width' => '800px',
       'height' => '500',
       ), $atts ));
