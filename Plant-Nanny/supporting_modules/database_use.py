@@ -30,12 +30,20 @@ def log_locally(i, f):
 sql_insert=dictionaries.sql_insert.copy()
 sql_select=dictionaries.sql_select.copy()
 
+#Import specified database connection properties
+if s.database_connection=='Local':
+    db_properties=s.database_local.copy()
+elif s.database_connection=='Remote':
+    db_properties=s.database_remote.copy()
+else:
+    raise Exception("Database connection property not valid! Please update database_connection value in settings.py")
+
 #Establish connection to database
 try:
-    plant_db=mysql.connector.connect(host=s.host,
-                                     user=s.username,
-                                     password=s.password,
-                                     database=s.database_name)
+    plant_db=mysql.connector.connect(host=db_properties['hostname'],
+                                     user=db_properties['db_username'],
+                                     password=db_properties['db_password'],
+                                     database=db_properties['db_name'])
     
     log_information(severity='p',
                     msg=("connection to database '%s' was successfull" % s.database_name))
