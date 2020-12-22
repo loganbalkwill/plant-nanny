@@ -46,11 +46,11 @@ try:
                                      database=db_properties['db_name'])
     
     log_information(severity='p',
-                    msg=("connection to database '%s' was successfull" % s.database_name))
+                    msg=("connection to database '%s' was successfull" % db_properties['db_name']))
     
 except:
     log_information(severity='p',
-                    msg=("FAILED to connect to database '%s'" % s.database_name)) 
+                    msg=("FAILED to connect to database '%s'" % db_properties['db_name'])) 
 
 
 def write_to_db(table, write_info,db=plant_db, log_local=True):
