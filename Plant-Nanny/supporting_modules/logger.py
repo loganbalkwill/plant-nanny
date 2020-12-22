@@ -8,7 +8,7 @@ import supporting_modules.database_use as db
 
 def log_action(event,result, additional_info=''):
     #break apart event into components
-    plant_id, plant_name, device_id, device_name, action_freq=event
+    Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq=event
     
     
     #create writing information
@@ -19,7 +19,7 @@ def log_action(event,result, additional_info=''):
         severity='w' #warning
         message_prefix='Failed to perform device action(s): '
         
-    message_base= 'plant_id= %s, plant_name= %s, device_id= %s, device_name= %s' % (plant_id, plant_name, device_id, device_name)
+    message_base= 'Assigned_type= %s, Assigned_id= %s, Assigned_name= %s, device_id= %s, device_name= %s' % (Assigned_type, Assigned_id, Assigned_name, device_id, device_name)
     
     message=message_prefix + message_base
     
@@ -31,7 +31,7 @@ def log_action(event,result, additional_info=''):
     
 def log_info(log_level,message, filename_log='log_trans', local=False):
     dt=datetime.now()
-    
+
     if log_level=='p':
         print('(' + dt.strftime("%m/%d/%Y, %H:%M:%S") + '): ' + message)
     elif local==True:
