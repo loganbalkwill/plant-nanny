@@ -13,19 +13,19 @@ read_frequency_mins=1
 """-------ADVANCED CONFIG SETTINGS-------"""
 #MySQL Database Information (Local):
 database_local={
-    db_name='plantnanny'    
-    hostname='localhost'
-    db_username='mainuser'
-    db_password='mainuser'
+    'db_name'       :   'plantnanny',    
+    'hostname'      :   'localhost',
+    'db_username'   :   'mainuser',
+    'db_password'   :   'mainuser'
 }
 phpmyadmin_password='Balk45610'
 
 #MySQL Database Information (Remote):
 database_remote={
-    db_name='plantnan_plantnanny'       #cpanelUsername_databaseName
-    hostname='50.87.253.14:3306'        #server IP Address:connection port
-    db_username='plantnan_raspberrypi'  #cpanelUsername_databaseUsername
-    db_password='FBoIxeR7bB=b'          #database User Password
+    'db_name'       :   'plantnan_plantnanny'       #cpanelUsername_databaseName
+    'hostname'      :   '50.87.253.14:3306'        #server IP Address:connection port
+    'db_username'   :   'plantnan_raspberrypi'  #cpanelUsername_databaseUsername
+    'db_password'   :   'FBoIxeR7bB=b'          #database User Password
 }
 
 #Local Logging Information:
