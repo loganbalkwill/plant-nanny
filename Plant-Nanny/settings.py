@@ -22,9 +22,9 @@ phpmyadmin_password='Balk45610'
 
 #MySQL Database Information (Remote):
 database_remote={
-    'db_name'       :   'plantnan_plantnanny'       #cpanelUsername_databaseName
-    'hostname'      :   '50.87.253.14:3306'        #server IP Address:connection port
-    'db_username'   :   'plantnan_raspberrypi'  #cpanelUsername_databaseUsername
+    'db_name'       :   'plantnan_plantnanny',       #cpanelUsername_databaseName
+    'hostname'      :   '50.87.253.14:3306',        #server IP Address:connection port
+    'db_username'   :   'plantnan_raspberrypi',  #cpanelUsername_databaseUsername
     'db_password'   :   'FBoIxeR7bB=b'          #database User Password
 }
 
