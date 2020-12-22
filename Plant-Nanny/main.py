@@ -104,7 +104,7 @@ def main():
         
         #Check sensors
         for action in plant_devices_list:
-            plant_id, plant_name, device_id, device_name, action_freq=action
+            Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq=action
             
             #Condition frequency value (if required)
             action_freq=looping.condition_frequency(action_freq)
