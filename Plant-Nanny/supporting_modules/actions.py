@@ -35,7 +35,7 @@ def perform_action(action):
     #input supplied as list in form:
     #PlantID, Plant Name, Device_ID, Device Name, Action_Frequency_Min
     
-    plant_id, plant_name, device_id, device_name, action_freq, =action
+    Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
     
     #decide what action to perform
     if device_name=='STEMMA Soil Sensor':
@@ -58,7 +58,7 @@ def perform_action(action):
         
         database_use.write_to_db(table='soilsensor_trans',
                                  write_info=[datetime.now(),
-                                             plant_id,
+                                             Assigned_id,
                                              soil_temp,
                                              soil_moisture])
     elif device_name=='SGP30':
@@ -68,7 +68,7 @@ def perform_action(action):
         
         database_use.write_to_db(table='gassensor_trans',
                                  write_info=[datetime.now(),
-                                             plant_id,
+                                             Assigned_id,
                                              air_eco2,
                                              air_tvoc])
     elif device_name=='APDS9960':
@@ -77,7 +77,7 @@ def perform_action(action):
         
         database_use.write_to_db(table='lightsensor_trans',
                                  write_info=[datetime.now(),
-                                             plant_id,
+                                             Assigned_id,
                                              r, g, b, c])
     elif device_name=='BME680':
         #retrieve values and insert record into database
@@ -88,7 +88,7 @@ def perform_action(action):
         
         database_use.write_to_db(table='airsensor_trans',
                                  write_info=[datetime.now(),
-                                             plant_id,
+                                             Assigned_id,
                                              temp,
                                              humidity,
                                              gasses,
@@ -96,7 +96,7 @@ def perform_action(action):
     elif device_name=='PiCamera':
         #Takes photo, stores to predefined location, writes info to database
         
-        fullpath=get_photos_path(plant_id, plant_name)
+        fullpath=get_photos_path(Assigned_id, Assigned_name)
         
         camera.start_preview()
         time.sleep(5) #Important to allow camera to stabilize the image
@@ -106,7 +106,7 @@ def perform_action(action):
         
         database_use.write_to_db(table='photo_trans',
                                  write_info=[datetime.now(),
-                                             plant_id,
+                                             Assigned_id,
                                              fullpath])
         
     return    
