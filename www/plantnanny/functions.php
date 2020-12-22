@@ -11,6 +11,8 @@ add_action( 'init', 'plant_nanny_add_shortcode');
 
 include('/var/www/html/wp-content/plugins/wp-charts-and-graphs/wp-charts-and-graphs.php');
 
+define('DB_DATA', 'plantnan_plantnanny');
+
 function plant_nanny_add_shortcode(){    
    add_shortcode('pn-latest-datetime', 'pn_get_latest_datetime');
    add_shortcode('pn-latest-temp', 'pn_get_latest_temp');
@@ -29,19 +31,25 @@ function plant_nanny_add_shortcode(){
 
 function pn_get_latest_datetime(){
    global $wpdb;
-   $results =  $wpdb->get_row("SELECT DateTime as DT FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+
+   $results =  $wpdb_pn->get_row("SELECT DateTime as DT FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
    return $results->DT;
  }
 
 function pn_get_latest_temp(){
    global $wpdb;
-   $results =  $wpdb->get_row("SELECT DateTime, ROUND(AirTemp_DegC,1) as AirTemp_DegC FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   
+   $results =  $wpdb_pn->get_row("SELECT DateTime, ROUND(AirTemp_DegC,1) as AirTemp_DegC FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
    return $results->AirTemp_DegC;
  }
 
 function pn_get_latest_humid(){
    global $wpdb;
-   $results =  $wpdb->get_row("SELECT DateTime, ROUND(AirHumidity_percent,1) as AirHumidity_percent FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   
+   $results =  $wpdb_pn->get_row("SELECT DateTime, ROUND(AirHumidity_percent,1) as AirHumidity_percent FROM airsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 0,1");
    return $results->AirHumidity_percent;
  }
 
@@ -59,7 +67,9 @@ function pn_get_latest_soilmoisture( $atts = '' ){
    
    //perform query & return result
    global $wpdb;
-   $results =  $wpdb->get_row($sql_string);
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   
+   $results =  $wpdb_pn->get_row($sql_string);
    $moisture = $results->SoilMoisture_avg;
    
    if ($moisture >= 66) {
@@ -92,8 +102,9 @@ function pn_get_latest_soilmoisture_change( $atts = '' ){
    
    //perform queries
    global $wpdb;
-   $results1 =  $wpdb -> get_row($sql_string_1);
-   $results2 =  $wpdb -> get_row($sql_string_2);
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   $results1 =  $wpdb_pn -> get_row($sql_string_1);
+   $results2 =  $wpdb_pn -> get_row($sql_string_2);
    
    //operate on query results
    $val1 = $results1 -> SoilMoisture_avg;
@@ -149,7 +160,8 @@ function get_datediff_str($d1, $d2){
 
 function pn_get_latest_lighting_rgb(){
    global $wpdb;
-   $results = $wpdb->get_row("SELECT DateTime, colour_red, colour_green, colour_blue, colour_clear FROM lightsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 1");
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   $results = $wpdb_pn->get_row("SELECT DateTime, colour_red, colour_green, colour_blue, colour_clear FROM lightsensor_trans WHERE 1 ORDER BY DateTime DESC LIMIT 1");
    return $results;
  }
 
@@ -157,7 +169,8 @@ function pn_get_lighting_schedule( $atts = '' ){
    //Returns string outlining summary of lighting schedule
    
    global $wpdb;
-   $results = $wpdb->get_results("SELECT lh.DT_Hour, lh.DT_Min, AVG(lh.lighting_avg) AS light_avg FROM (SELECT (lt.colour_red + lt.colour_green + lt.colour_blue + lt.colour_clear/4) AS lighting_avg, HOUR(lt.DateTime) AS DT_Hour, (CASE WHEN MINUTE(lt.DateTime)<=15 THEN 0 WHEN MINUTE(lt.DateTime)<=30 THEN 15 WHEN MINUTE(lt.DateTime)<=45 THEN 30 WHEN MINUTE(lt.DateTime)<=60 THEN 45 END) AS DT_Min FROM lightsensor_trans AS lt WHERE DATE(lt.DateTime)=(CURRENT_DATE()-1)) AS lh GROUP BY lh.DT_Hour, lh.DT_Min");
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   $results = $wpdb_pn->get_results("SELECT lh.DT_Hour, lh.DT_Min, AVG(lh.lighting_avg) AS light_avg FROM (SELECT (lt.colour_red + lt.colour_green + lt.colour_blue + lt.colour_clear/4) AS lighting_avg, HOUR(lt.DateTime) AS DT_Hour, (CASE WHEN MINUTE(lt.DateTime)<=15 THEN 0 WHEN MINUTE(lt.DateTime)<=30 THEN 15 WHEN MINUTE(lt.DateTime)<=45 THEN 30 WHEN MINUTE(lt.DateTime)<=60 THEN 45 END) AS DT_Min FROM lightsensor_trans AS lt WHERE DATE(lt.DateTime)=(CURRENT_DATE()-1)) AS lh GROUP BY lh.DT_Hour, lh.DT_Min");
    
    $light_schedule = determine_lighting_schedule($results);
    
@@ -314,7 +327,8 @@ function chart_latest_soil_moisture( $atts = '' ){
    
    //Run Query
    global $wpdb;
-   $results = $wpdb->get_results($qry_str);
+   $wpdb_pn = new $wpdb(DB_USER, DB_PASSWORD, DB_DATA, DB_HOST);
+   $results = $wpdb_pn->get_results($qry_str);
    
    //Unpack Query Results
    $titles = "";
