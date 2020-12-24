@@ -7,7 +7,7 @@ database_connection='Local'
 refresh_mins=10
 #Instrument Settings
 read_frequency_mins=1
-
+allow_threading=True
 
 
 """-------ADVANCED CONFIG SETTINGS-------"""
