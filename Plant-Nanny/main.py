@@ -36,7 +36,7 @@ GENERAL ALGORITHM:
         -WRITE ^ TO DATABASE
         -CHECK VALUE AGAINST ALLOWABLE CONSTRAINTS
         -PERFORM ACTION(S) AS REQUIRED:
-            -PERFORM PHYSICAL ACTION (I.E. WATER)
+            -SENSOR ACTION (read information)
             -NOTIFY SUBSCRIBER(S) VIA EMAIL
 
 -----------------------------------------------------------------
@@ -45,6 +45,9 @@ VERSIONING:
     1.0.1                   -   I AM BORN
     1.1.1                   -   Major code restructuring (no significant program impact)
     1.2.1   (2020-12-18)    -   Patches to fit new db structure 
+    
+    2.0.0   (2020-12-23)    -   (NEW) Introduces Multithreading   TODO
+                            -   (NEW) Introduces Emailing Functionality
 """
 
 #TODO: find good way of resetting the loop counter
