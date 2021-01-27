@@ -1,12 +1,14 @@
 #Created by Logan Balkwill
 #Created on 8-30-2020
 import sys
-from importlib import reload
-sys.path.insert(0, '..')
+from importlib import reload as reload
 
 import mysql.connector
+
+sys.path.insert(0, '..')
 import settings as s
 import supporting_modules.dictionaries as dictionaries
+
 
 #The below import statement is used in the log_information function
 import supporting_modules.logger as logger
