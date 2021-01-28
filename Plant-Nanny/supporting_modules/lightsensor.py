@@ -6,13 +6,14 @@ __status__ = "Production"
 import adafruit_apds9960.apds9960 #APDS9960 light sensor
 from board import SCL, SDA
 import busio
-import time
+from datetime import datetime
 import datetime
 import atexit
 import sys
 
-sys.path.insert(0, '..')
 import database_use
+sys.path.insert(0, '..')
+
 
 #Define I2C interface
 i2c = busio.I2C(SCL, SDA, frequency=100000)
