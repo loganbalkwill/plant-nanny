@@ -53,7 +53,7 @@ VERSIONING:
 #########################
 ### STARTUP PROCEDURE ###
 #########################
-
+#!/usr/bin/env python
 #Initialize Global Variables
 i2c_available=[]
 plant_devices_list=[]
