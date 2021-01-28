@@ -11,6 +11,9 @@ import datetime
 import atexit
 import sys
 
+sys.path.insert(0, '..')
+import database_use
+
 #Define I2C interface
 i2c = busio.I2C(SCL, SDA, frequency=100000)
 
@@ -23,18 +26,28 @@ def begin_session( Assigned_id='', sleep_interval = 1, read_freq_mins=1, start_w
         send_health_info(assigned_id=Assigned_id , service=__file__ , result="Success" , msg="Light Sensor Service (APDS9960) has started")
     except:
         send_health_info(assigned_id=Assigned_id , service=__file__ , result="Failure" , msg="Light Sensor Service (APDS9960) could not be started")
-        exit
+        return
     
-    #begin 
+    #begin
+    counter_goal=60*read_freq_mins
+    if start_with_read: counter=counter_goal
+    else: counter=0
+    
     while True:
         r,g,b,c=apds.color_data
-        print("Red: %s; Green: %s; Blue: %s; Clear: %s"%(r,g,b,c))
-        time.sleep(sleep_interval)
-        """database_use.write_to_db(table='lightsensor_trans',
-                                 write_info=[datetime.now(),
-                                 Assigned_id,
-                                 r, g, b, c])"""
+        print("Red: %s; Green: %s; Blue: %s; Clear: %s    (counter=%s)"%(r,g,b,c,counter))
 
+        if (counter>=counter_goal):    
+            counter=0            #reset counter
+            #write info to db
+            database_use.write_to_db(table='lightsensor_trans',
+                                     write_info=[datetime.now(), Assigned_id, r, g, b, c])
+        else:
+            counter+=1           #not yet time to write to db; loop
+        
+        time.sleep(sleep_interval)
+        
+        
 def testing_mode (sleep_interval = 1):
     try:
         apds = adafruit_apds9960.apds9960.APDS9960(i2c)
