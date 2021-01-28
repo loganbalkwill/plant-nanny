@@ -7,10 +7,11 @@
 
 __author__    = "Logan Balkwill"
 __date__      = "September 10, 2020"
-__version__   = "1.2.1"
+__version__   = "2.0.0"
 __maintainer__= "Logan Balkwill"
 __email__     = "lgb0020@gmail.com"
 
+__status__    = "TESTING"
 
 import time
 import math
@@ -69,12 +70,16 @@ def startup():
     #Build list of sensors in-use
     i2c_available=device_info.find_i2c_devices()
     plant_devices_list=db.build_plant_devices_list()
-    action_freq_list=looping.get_action_freqs(plant_devices_list)
     
+    #DEPRICATED IN V2.0.0
+        #action_freq_list=looping.get_action_freqs(plant_devices_list)     v2.0.0
+        
 
-        #Calculate looping frequency
-    loop_freq=looping.get_loop_frequency(action_freq_list)
+            #Calculate looping frequency
+        #loop_freq=looping.get_loop_frequency(action_freq_list)
 
+    #STARTUP SYSTEM SERVICES
+    
     #Check Database Connection
         #Check for queued logs
     logs_queued_prev = logs_queued

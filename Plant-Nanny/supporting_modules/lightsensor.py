@@ -7,7 +7,7 @@ import adafruit_apds9960.apds9960 #APDS9960 light sensor
 from board import SCL, SDA
 import busio
 from datetime import datetime
-import datetime
+import time
 import atexit
 import sys
 
@@ -18,7 +18,7 @@ sys.path.insert(0, '..')
 #Define I2C interface
 i2c = busio.I2C(SCL, SDA, frequency=100000)
 
-def begin_session( Assigned_id='', sleep_interval = 1, read_freq_mins=1, start_with_read=True ):
+def begin_session( Assigned_id=1, sleep_interval = 1, read_freq_mins=1, start_with_read=True ):
     #CALLED FROM THE APPLICATION
     #initialize device
     try:
@@ -42,7 +42,9 @@ def begin_session( Assigned_id='', sleep_interval = 1, read_freq_mins=1, start_w
             counter=0            #reset counter
             #write info to db
             database_use.write_to_db(table='lightsensor_trans',
-                                     write_info=[datetime.now(), Assigned_id, r, g, b, c])
+                                     write_info=[datetime.now(),
+                                                 Assigned_id,
+                                                 r, g, b, c])
         else:
             counter+=1           #not yet time to write to db; loop
         

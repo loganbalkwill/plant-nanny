@@ -58,7 +58,7 @@ def log_locally(info, filename, folder_path=settings.log_directory, filetype=set
         if item==info[0]:
             msg+=str(item)
         else:
-            msg+= '; ' + item
+            msg+= '; ' + str(item)
     
     #Write information to file
     f=open(fullpath,"a")
