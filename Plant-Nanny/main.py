@@ -92,8 +92,8 @@ def startup():
     
     #Check Database Connection
         #Check for queued logs
-        logs_queued_prev = logs_queued
-        logs_queued, msg = logging.local_logs_exist()
+    logs_queued_prev = logs_queued
+    logs_queued, msg = logging.local_logs_exist()
     
     if logs_queued > 0 and logs_queued != logs_queued_prev:
         logging.log_info(log_level='i', message=msg)
