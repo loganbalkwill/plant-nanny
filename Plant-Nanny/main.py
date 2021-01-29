@@ -17,7 +17,6 @@ import time
 import math
 import settings as s
 import multiprocessing
-import supporting_modules.looping as looping
 import supporting_modules.logger as logging
 import supporting_modules.actions as actions
 import supporting_modules.device_info as device_info
@@ -112,41 +111,8 @@ def startup():
 ####### MAIN LOOP #######
 #########################
 def main():
-    
-    loopcounter=1
-    
-    while 1==1:
-        
-        #Check sensors
-        for action in plant_devices_list:
-            Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq=action
-            
-            #Condition frequency value (if required)
-            action_freq=looping.condition_frequency(action_freq)
-            
-            #Check if interval has elapsed
-            if(loopcounter % action_freq==0):
-                #Yes; Perform Action
-                try:
-                    actions.perform_action(action)
-                    logging.log_action(action,"success")
-                except:
-                    logging.log_action(action,"failure")
-        
-        #Check if system check interval has elapsed
-        if (loopcounter % s.refresh_mins == 0):
-            logging.log_info( log_level='p', message="Checking for new information...")
-            startup() #yep; run the startup procedure again
-        
-        
-        #Increment interval counter
-        try:
-            loopcounter+=1
-        except:
-            looping.reset_loopcounter(loopcounter)
-            
-            
-        time.sleep(60*loop_freq)
+    while True:
+        print("do something")
         
 def map_service(action):
     #looks at action and starts the relevant process
