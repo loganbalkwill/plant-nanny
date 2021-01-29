@@ -150,86 +150,21 @@ def main():
         
 def map_service(action):
     #looks at action and starts the relevant process
-
     Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
 
     if device_id==3:        #STEMMA Soil Sensor
         script_name='soilsensor.py'
-
-        """#retrieve values and insert record into database
-        #AVERAGE x READINGS
-        x=30
-        i=0
-        soil_temp=0
-        soil_moisture=0
-        
-        while i<x:
-            soil_temp=soil_temp + sensors.get_soil_temp()
-            soil_moisture=soil_moisture + sensors.get_soil_moisture()
-        
-            i+=1
-            time.sleep(1)
-    
-        soil_temp=soil_temp/x
-        soil_moisture=soil_moisture/x
-        
-        database_use.write_to_db(table='soilsensor_trans',
-                                 write_info=[datetime.now(),
-                                             Assigned_id,
-                                             soil_temp,
-                                             soil_moisture])"""
     elif device_id==2:       #SGP30
         script_name='gassensor.py'
-        """#retrieve values and insert record into database
-        air_eco2=sensors.get_air_co2()
-        air_tvoc=sensors.get_air_tvoc()
-        
-        database_use.write_to_db(table='gassensor_trans',
-                                 write_info=[datetime.now(),
-                                             Assigned_id,
-                                             air_eco2,
-                                             air_tvoc])"""
     elif device_id==6:        #APDS9960
         script_name='lightsensor.py'
-        """#retrieve values and insert record into database
-        r,g,b,c=sensors.get_light_rgbc()
-        
-        database_use.write_to_db(table='lightsensor_trans',
-                                 write_info=[datetime.now(),
-                                             Assigned_id,
-                                             r, g, b, c])"""
     elif device_id==1:         #BME680
         script_name='airsensor.py'
-        """#retrieve values and insert record into database
-        temp=sensors.get_air_temp()
-        humidity=sensors.get_air_humidity()
-        pressure=sensors.get_air_pressure()
-        gasses=sensors.get_air_gas()
-        
-        database_use.write_to_db(table='airsensor_trans',
-                                 write_info=[datetime.now(),
-                                             Assigned_id,
-                                             temp,
-                                             humidity,
-                                             gasses,
-                                             pressure])"""
     elif device_id==5:      #PiCamera
         script_name='camera.py'
-        """#Takes photo, stores to predefined location, writes info to database
-        
-        fullpath=get_photos_path(Assigned_id, Assigned_name)
-        
-        camera.start_preview()
-        time.sleep(5) #Important to allow camera to stabilize the image
-        
-        camera.capture(fullpath)
-        camera.stop_preview()
-        
-        database_use.write_to_db(table='photo_trans',
-                                 write_info=[datetime.now(),
-                                             Assigned_id,
-                                             fullpath])"""
-
+    else:
+        raise Exception "Device not defined! please address in main.py"
+    
     return script_name
 
 
