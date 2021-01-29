@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #settings.py
 
 """---------QUICK-EDIT SETTINGS---------"""

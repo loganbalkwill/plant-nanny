@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess
 import supporting_modules.logger as logger
 

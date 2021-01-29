@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 import time
 from board import SCL, SDA

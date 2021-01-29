@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #Created by Logan Balkwill
 #Created on 8-30-2020
 import sys
