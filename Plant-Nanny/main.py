@@ -154,6 +154,8 @@ def map_service(action):
     Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
 
     if device_id==3:        #STEMMA Soil Sensor
+        script_name='soilsensor.py'
+
         """#retrieve values and insert record into database
         #AVERAGE x READINGS
         x=30
@@ -177,6 +179,7 @@ def map_service(action):
                                              soil_temp,
                                              soil_moisture])"""
     elif device_id==2:       #SGP30
+        script_name='gassensor.py'
         """#retrieve values and insert record into database
         air_eco2=sensors.get_air_co2()
         air_tvoc=sensors.get_air_tvoc()
@@ -187,6 +190,7 @@ def map_service(action):
                                              air_eco2,
                                              air_tvoc])"""
     elif device_id==6:        #APDS9960
+        script_name='lightsensor.py'
         """#retrieve values and insert record into database
         r,g,b,c=sensors.get_light_rgbc()
         
@@ -195,6 +199,7 @@ def map_service(action):
                                              Assigned_id,
                                              r, g, b, c])"""
     elif device_id==1:         #BME680
+        script_name='airsensor.py'
         """#retrieve values and insert record into database
         temp=sensors.get_air_temp()
         humidity=sensors.get_air_humidity()
@@ -209,6 +214,7 @@ def map_service(action):
                                              gasses,
                                              pressure])"""
     elif device_id==5:      #PiCamera
+        script_name='camera.py'
         """#Takes photo, stores to predefined location, writes info to database
         
         fullpath=get_photos_path(Assigned_id, Assigned_name)
@@ -223,6 +229,9 @@ def map_service(action):
                                  write_info=[datetime.now(),
                                              Assigned_id,
                                              fullpath])"""
+
+    return script_name
+
 
 if __name__=='__main__':
     startup()
