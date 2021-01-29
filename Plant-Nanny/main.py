@@ -45,7 +45,12 @@ GENERAL ALGORITHM:
 VERSIONING:
     1.0.1                   -   I AM BORN
     1.1.1                   -   Major code restructuring (no significant program impact)
-    1.2.1   (2020-12-18)    -   Patches to fit new db structure 
+    1.2.1   (2020-12-18)    -   Patches to fit new db structure
+    
+    2.0.0   (2021-01-24)    -   MAJOR CODE OVERHAUL
+                                -   Threading sensor scripts (TODO) 
+                                -   Use standard "logging" python library; depricate "logger" (TODO)
+                                -   Script to start program on launch (TODO: register script in crontab) 
 """
 
 #TODO: find good way of resetting the loop counter
@@ -59,8 +64,8 @@ VERSIONING:
 i2c_available=[]
 plant_devices_list=[]
 action_freq_list=[]
-loop_freq=s.read_frequency_mins
-logs_queued=0
+#loop_freq=s.read_frequency_mins      v2.0.0
+#logs_queued=0                        v2.0.0
 
 def startup():
     #Acknowledge global variables
