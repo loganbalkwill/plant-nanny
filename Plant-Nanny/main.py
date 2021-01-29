@@ -16,6 +16,7 @@ __status__    = "TESTING"
 import time
 import math
 import settings as s
+import multiprocessing
 import supporting_modules.looping as looping
 import supporting_modules.logger as logging
 import supporting_modules.actions as actions
@@ -54,6 +55,7 @@ VERSIONING:
 """
 
 #TODO: find good way of resetting the loop counter
+    #Solution: use multithreading to sub-divide loop counters; not necesary in main
 
 
 #########################
@@ -69,7 +71,7 @@ action_freq_list=[]
 
 def startup():
     #Acknowledge global variables
-    global i2c_available, plant_devices_list, action_freq_list, loop_freq, logs_queued
+    global i2c_available, plant_devices_list, action_freq_list  #, loop_freq, logs_queued v2.0.0
     
     #Check Peripherals
     #Build list of sensors in-use
@@ -83,12 +85,14 @@ def startup():
             #Calculate looping frequency
         #loop_freq=looping.get_loop_frequency(action_freq_list)
 
+    #STARTUP DEVICE SERVICES
+
     #STARTUP SYSTEM SERVICES
     
     #Check Database Connection
         #Check for queued logs
-    logs_queued_prev = logs_queued
-    logs_queued, msg = logging.local_logs_exist()
+        logs_queued_prev = logs_queued
+        logs_queued, msg = logging.local_logs_exist()
     
     if logs_queued > 0 and logs_queued != logs_queued_prev:
         logging.log_info(log_level='i', message=msg)
