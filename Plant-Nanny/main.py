@@ -91,6 +91,7 @@ def startup():
     
     #Check Database Connection
         #Check for queued logs
+    """
     logs_queued_prev = logs_queued
     logs_queued, msg = logging.local_logs_exist()
     
@@ -101,7 +102,7 @@ def startup():
     
     if logs_queued > 0:
         logging.upload_local_logs()
-
+    """
     #Check Emailing Functionality
 
 
