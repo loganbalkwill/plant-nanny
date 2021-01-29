@@ -163,7 +163,7 @@ def map_service(action):
     elif device_id==5:      #PiCamera
         script_name='camera.py'
     else:
-        raise Exception "Device not defined! please address in main.py"
+        raise Exception('Device not defined! please address in main.py')
     
     return script_name
 
