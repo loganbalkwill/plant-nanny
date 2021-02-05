@@ -116,13 +116,14 @@ class device():
         
         if len(x)!=3:
             raise Exception("Could not unpack keyID due to mismatch in key length; Expected: 3 , Supplied: %s" %len(x))
-        
+
         self.RoomID=x[0]
         self.PlantID=x[1]
         self.DeviceID=x[2]
 
     def get_info(self):
-
+        print("TODO")
+        
     def map_service(self):
         #looks at action and starts the relevant process
         Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
