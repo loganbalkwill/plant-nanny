@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from datetime import datetime
+import time
 import ast
 import os, sys
 sys.path.insert(0, '..')
@@ -136,6 +137,22 @@ def upload_local_logs():
     msg='Results of re-uploading queued logs: %s successful,  %s failed (%s files involved)' % (logs_success, logs_failed, logfiles)                   
     log_info(log_level='p',message=msg)  
                 
+
+def logging_service (sleep_interval = 60):
+    #Check for queued logs
+
+    logs_queued_prev = logs_queued
+    logs_queued, msg = logging.local_logs_exist()
+    
+    if logs_queued > 0 and logs_queued != logs_queued_prev:
+        log_info(log_level='i', message=msg)
+    else:
+        log_info(log_level='p',message=msg)
+    
+    if logs_queued > 0:
+        upload_local_logs()
+
+    time.sleep(sleep_interval) 
 
 if __name__=="__main__":
     local_logs_exist()
