@@ -107,16 +107,21 @@ class device():
     def __init__(self, key_ID):
         self.keyID=key_ID
         self.unpack_keyID(self.keyID)
+        self.getinfo()
 
     def unpack_keyID(self, keyID):
-        #takes the device assignment KeyID and identifies information about the device & assignment properties
+        #unpacks the keyID string to identify basic information
         #keyID is supplied in the format "<RoomID>|<PlantID>|<DeviceID>"
         x=keyID.split('|')
+        
+        if len(x)!=3:
+            raise Exception("Could not unpack keyID due to mismatch in key length; Expected: 3 , Supplied: %s" %len(x))
         
         self.RoomID=x[0]
         self.PlantID=x[1]
         self.DeviceID=x[2]
-        
+
+    def get_info(self):
 
     def map_service(self):
         #looks at action and starts the relevant process
