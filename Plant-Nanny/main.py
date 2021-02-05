@@ -84,30 +84,6 @@ def startup():
     ###############################
 
 
-
-    ################################################
-    # THIS STUFF NEEDS TO GO TO LOG_WATCHDOG SERVICE
-    # ##############################################
-    
-    #Check Database Connection
-        #Check for queued logs
-    """
-    logs_queued_prev = logs_queued
-    logs_queued, msg = logging.local_logs_exist()
-    
-    if logs_queued > 0 and logs_queued != logs_queued_prev:
-        logging.log_info(log_level='i', message=msg)
-    else:
-        logging.log_info(log_level='p',message=msg)
-    
-    if logs_queued > 0:
-        logging.upload_local_logs()
-    """
-    #Check Emailing Functionality
-
-
-
-
 #########################
 ####### MAIN LOOP #######
 #########################
