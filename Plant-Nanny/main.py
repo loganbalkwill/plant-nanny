@@ -63,7 +63,7 @@ action_freq_list=[]
 
 def startup():
     #Acknowledge global variables
-    global i2c_available, plant_devices_list, action_freq_list  #, loop_freq, logs_queued v2.0.0
+    global i2c_available, plant_devices_list, action_freq_list
     
     #Check Peripherals
     #Build list of sensors in-use
