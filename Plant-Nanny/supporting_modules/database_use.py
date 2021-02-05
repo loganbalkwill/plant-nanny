@@ -79,7 +79,7 @@ def write_to_db(table, write_info,db=plant_db, log_local=True):
             log_locally(i=write_info, f=table)
         else: raise Exception("Information not logged!!!")
 
-def query_db(sql_string):
+def query_db(sql_string, additional_sql=''):
     #Handles database queries; returns query results
     results=[]
 
