@@ -122,26 +122,12 @@ class device():
         self.DeviceID=x[2]
 
     def get_info(self):
-        print("TODO")
-        
-    def map_service(self):
-        #looks at action and starts the relevant process
-        Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
-
-        if device_id==3:        #STEMMA Soil Sensor
-            script_name='soilsensor.py'
-        elif device_id==2:       #SGP30
-            script_name='gassensor.py'
-        elif device_id==6:        #APDS9960
-            script_name='lightsensor.py'
-        elif device_id==1:         #BME680
-            script_name='airsensor.py'
-        elif device_id==5:      #PiCamera
-            script_name='camera.py'
-        else:
-            raise Exception('Device not defined! please address in main.py')
-        
-        return script_name
+        #gathers additional information about the device assignment using database queries
+        self.RoomName=db.query_db(sql_str)
+        self.PlantName=db.query_db(sql_str)
+        self.DeviceName=db.query_db(sql_str)
+        self.ActionFrequency_mins=db.query_db(sql_str)
+        self.ScriptName=db.query_db(sql_str)
 
 
 if __name__=='__main__':
