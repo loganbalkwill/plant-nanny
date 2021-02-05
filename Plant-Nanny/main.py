@@ -21,6 +21,7 @@ import supporting_modules.logger as logging
 import supporting_modules.actions as actions
 import supporting_modules.device_info as device_info
 import supporting_modules.database_use as db
+import supporting_modules.dictionaries as dictionaries
 
 """
 GENERAL ALGORITHM:
@@ -123,11 +124,15 @@ class device():
 
     def get_info(self):
         #gathers additional information about the device assignment using database queries
-        self.RoomName=db.query_db(sql_str)
-        self.PlantName=db.query_db(sql_str)
-        self.DeviceName=db.query_db(sql_str)
-        self.ActionFrequency_mins=db.query_db(sql_str)
-        self.ScriptName=db.query_db(sql_str)
+        
+        #import SQL Query Dictionary
+        sql_dict=dictionaries.sql_select.copy()
+
+        self.RoomName=db.query_db(sql_dict['room_name'], self.RoomID)
+        self.PlantName=db.query_db(sql_dict['plant_name'], self.PlantID)
+        self.DeviceName=db.query_db(sql_dict['device_name'], self.DeviceID)
+        self.ActionFrequency_mins=db.query_db(sql_dict['action_frequency'], self.keyID)
+        self.ScriptName=db.query_db(sql_dict['script_name'], self.DeviceID)
 
 
 if __name__=='__main__':
