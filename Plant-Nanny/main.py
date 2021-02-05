@@ -91,9 +91,7 @@ def main():
 
 
 #I might move this class to another file
-class device(keyID):
-    keyID=''
-
+class device():
     RoomID=''
     RoomName=''
 
@@ -104,16 +102,23 @@ class device(keyID):
     DeviceName=''
 
     ActionFrequency_mins=10
+    ScriptName=''
 
-    def __init__():
-
+    def __init__(self, key_ID):
+        self.keyID=key_ID
         self.unpack_keyID(self.keyID)
 
-    def unpack_keyID(keyID):
+    def unpack_keyID(self, keyID):
         #takes the device assignment KeyID and identifies information about the device & assignment properties
+        #keyID is supplied in the format "<RoomID>|<PlantID>|<DeviceID>"
+        x=keyID.split('|')
+        
+        self.RoomID=x[0]
+        self.PlantID=x[1]
+        self.DeviceID=x[2]
         
 
-    def map_service(action):
+    def map_service(self):
         #looks at action and starts the relevant process
         Assigned_id, Assigned_type, Assigned_name, device_id, device_name, action_freq =action
 
