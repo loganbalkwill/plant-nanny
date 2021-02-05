@@ -108,7 +108,7 @@ class device():
     def __init__(self, key_ID):
         self.keyID=key_ID
         self.unpack_keyID(self.keyID)
-        self.getinfo()
+        self.get_info()
 
     def unpack_keyID(self, keyID):
         #unpacks the keyID string to identify basic information
