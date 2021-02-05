@@ -88,8 +88,16 @@ def query_db(sql_string, additional_sql=''):
         if (sql_string.find('SELECT')==-1) and (sql_string.find('select')==-1):
             #INVALID!! the provided string may be a 'UPDATE','DELETE', or other style string
             raise Exception('Error retrieving info from database... SQL string does not contain a SELECT statement!!')
+        
+        #Add addition_sql to sql_string
+        if additional_sql!='':
+            if (sql_string.find('WHERE')==-1) and (sql_string.find('where')==-1):
+                sql_string=sql_string + ' WHERE ' + additional_sql
+            else:
+                sql_string=sql_string + ' ' + additional_sql
 
         #Run Query
+
         mycursor=plant_db.cursor()
         mycursor.execute(sql_string)
         
