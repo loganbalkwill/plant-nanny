@@ -53,10 +53,6 @@ VERSIONING:
                                 -   Script to start program on launch (TODO: register script in crontab) 
 """
 
-#TODO: find good way of resetting the loop counter
-    #Solution: use multithreading to sub-divide loop counters; not necesary in main
-
-
 #########################
 ### STARTUP PROCEDURE ###
 #########################
