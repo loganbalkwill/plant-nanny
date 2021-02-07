@@ -23,7 +23,7 @@ class service():
 
         #run the service
         run_service()
-        
+
     def terminate(self):
         self.Status='stopped'
 
@@ -39,7 +39,7 @@ class service():
         update_status('running')
 
         #enter loop
-        while self.Status='running':
+        while self.Status=='running':
             try:
                 
             except:
