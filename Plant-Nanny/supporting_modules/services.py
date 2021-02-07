@@ -9,9 +9,11 @@ class service():
 
     def __init__(self):
         #initial setup
-        
+
     def start():
-        #prepares to run service
+        #prepare to run service
+
+        #run the service
 
     def terminate():
         #perform post-script stuff
@@ -20,4 +22,13 @@ class service():
         #sends service status info to database
 
     def run_service():
-        #
+        #main loop for running service
+        
+        #update service status
+        #start loop
+            try:
+                #main loop
+            except:
+                #main loop exited unexpectedly
+                #update service status
+                #send diagnostics
