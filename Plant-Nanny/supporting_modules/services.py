@@ -7,12 +7,20 @@
 class service():
     Status='stopped'
 
-    def __init__(self):
+    ActionFrequency_mins=10
+    ScriptName=''
+
+    def __init__(self, AssignmentContext, ScriptContext):
         #initial setup
+        try:
+            RoomID, RoomName, PlantID, PlantName, DeviceID, DeviceName = AssignmentContext
+            ScriptName, ActionFrequency_mins = ScriptContext
+        except:
+            raise Exception("Failed to assign service context information")
 
     def start():
         #prepare to run service
-
+        
         #run the service
 
     def terminate():
