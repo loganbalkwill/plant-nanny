@@ -18,25 +18,34 @@ class service():
         except:
             raise Exception("Failed to assign service context information")
 
-    def start():
+    def start(self):
         #prepare to run service
-        
+
         #run the service
+        run_service()
+        
+    def terminate(self):
+        self.Status='stopped'
 
-    def terminate():
-        #perform post-script stuff
-
-    def update_status():
+    def update_status(self, status):
         #sends service status info to database
 
-    def run_service():
+        #update variable
+        self.Status=status
+
+    def run_service(self):
         #main loop for running service
-        
         #update service status
-        #start loop
+        update_status('running')
+
+        #enter loop
+        while self.Status='running':
             try:
-                #main loop
+                
             except:
                 #main loop exited unexpectedly
                 #update service status
+                update_status('stopped')
                 #send diagnostics
+        
+        #service is no longer running; do post-service stuff
