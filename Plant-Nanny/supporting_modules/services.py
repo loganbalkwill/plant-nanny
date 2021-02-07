@@ -20,6 +20,9 @@ class service():
 
     def start(self):
         #prepare to run service
+            #TODO validate information to make sure the service can run
+            #TODO condition/transform info for easier use in loop
+                #TODO convert loop frequency from min to sec
 
         #run the service
         run_service()
@@ -28,7 +31,7 @@ class service():
         self.Status='stopped'
 
     def update_status(self, status):
-        #sends service status info to database
+        #TODO send service status info to database
 
         #update variable
         self.Status=status
@@ -41,11 +44,11 @@ class service():
         #enter loop
         while self.Status=='running':
             try:
-                
+                #TODO loop stuff
             except:
                 #main loop exited unexpectedly
                 #update service status
                 update_status('stopped')
-                #send diagnostics
+                #TODO send diagnostics
         
-        #service is no longer running; do post-service stuff
+        #TODO service is no longer running; do post-service stuff
