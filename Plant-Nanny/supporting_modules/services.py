@@ -88,7 +88,10 @@ def validate_assignmentcontext(AssignmentContext):
 
     #Context Checks
     assert ((RoomID is not None) or (PlantID is not None)), "RoomID and PlantID were not provided; at least one of these must be provided"
-    assert (RoomID )
+    assert ((RoomID is not None) and (RoomName is None)), "RoomID provided without RoomName"
+    assert (((PlantID is not None) and (PlantName is None)) or (PlantID is None)), "PlantID provided without PlantName"
+    assert (((RoomID is not None) and (RoomName is None)) or (RoomID is None)), "RoomID provided without RoomName"
+    assert (((DeviceID is not None) and (DeviceName is None)) or (DeviceID is None)), "DeviceID provided without DeviceName"
 
 def validate_scriptcontext(ScriptContext):
     #Checks that the script data supplied to the service is usable
