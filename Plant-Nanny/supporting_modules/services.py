@@ -16,8 +16,8 @@ class service():
     def __init__(self, AssignmentContext, ScriptContext):
         #initial setup
         try:
-            RoomID, RoomName, PlantID, PlantName, DeviceID, DeviceName = AssignmentContext
-            ScriptName, ActionFrequency_mins, StartWithAction = ScriptContext
+            self.RoomID, self.RoomName, self.PlantID, self.PlantName, self.DeviceID, self.DeviceName = AssignmentContext
+            self.ScriptName, self.ActionFrequency_mins, self.StartWithAction = ScriptContext
         except:
             raise Exception("Failed to assign service context information")
 
@@ -41,7 +41,9 @@ class service():
         self.Status=status
 
     def perform_action(self):
-    
+        #TODO This stuff
+        print("perform_action was called")
+
     def run_service(self):
         #main loop for running service
         #update service status
