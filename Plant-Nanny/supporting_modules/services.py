@@ -26,8 +26,7 @@ class service():
             #TODO validate information to make sure the service can run
             #TODO condition/transform info for easier use in loop
                 #TODO convert action frequency from min to sec
-
-
+        self.looplength=60*self.ActionFrequency_mins/self.LoopFrequency
         #run the service
         self.run_service()
 
@@ -57,8 +56,15 @@ class service():
         while self.Status=='running':
             try:
                 #TODO loop stuff
-                print("Service Loop is Running!")
-                
+                #TODO all math for calculating looping parameters is wrong
+                print("Service Loop is Running (%s / %s)" %(loopcounter, self.looplength))
+
+                if loopcounter<self.looplength:
+                    loopcounter+=1
+                else:
+                    self.perform_action()
+                    loopcounter=0
+
                 time.sleep(self.LoopFrequency)
 
             except:
