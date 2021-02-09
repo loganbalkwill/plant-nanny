@@ -15,10 +15,10 @@ class service():
 
     def __init__(self, AssignmentContext, ScriptContext):
         #initial setup
+        #TODO validate information to make sure the service can run
+        validate_assignmentcontext(AssignmentContext)
+        validate_scriptcontext(ScriptContext)
         try:
-            #TODO validate information to make sure the service can run
-            validate_assignmentcontext(AssignmentContext)
-            validate_scriptcontext(ScriptContext)
             self.RoomID, self.RoomName, self.PlantID, self.PlantName, self.DeviceID, self.DeviceName = AssignmentContext
             self.ScriptName, self.ActionFrequency_mins, self.StartWithAction = ScriptContext
         except:
@@ -88,10 +88,9 @@ def validate_assignmentcontext(AssignmentContext):
 
     #Context Checks
     assert ((RoomID is not None) or (PlantID is not None)), "RoomID and PlantID were not provided; at least one of these must be provided"
-    assert ((RoomID is not None) and (RoomName is None)), "RoomID provided without RoomName"
-    assert (((PlantID is not None) and (PlantName is None)) or (PlantID is None)), "PlantID provided without PlantName"
-    assert (((RoomID is not None) and (RoomName is None)) or (RoomID is None)), "RoomID provided without RoomName"
-    assert (((DeviceID is not None) and (DeviceName is None)) or (DeviceID is None)), "DeviceID provided without DeviceName"
+    assert (((PlantID is not None) and (PlantName is not None)) or ((PlantID is None) and (PlantName is None))), "PlantID provided without PlantName"
+    assert (((RoomID is not None) and (RoomName is not None)) or ((RoomID is None) and (RoomName is None))), "RoomID provided without RoomName"
+    assert (((DeviceID is not None) and (DeviceName is not None)) or ((DeviceID is None) and (DeviceName is None))), "DeviceID provided without DeviceName"
 
 def validate_scriptcontext(ScriptContext):
     #Checks that the script data supplied to the service is usable
@@ -99,5 +98,5 @@ def validate_scriptcontext(ScriptContext):
 
 
 if __name__ == "__main__":
-    testService=service([1,"Test Room",None,None,2,"Test Plant"],["TestScript.py", 0.25 , True])
+    testService=service([1,"Test Room",2,"Test Plant",3,"Test Device"],["TestScript.py", 0.25 , True])
     testService.start()
