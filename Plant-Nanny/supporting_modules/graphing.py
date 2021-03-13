@@ -24,32 +24,42 @@ DONE:
     SQL libraries for easier lookup
 """
 
-axis_intervals_hours=[0,3,6,9,12,15,18,21,24]
+
+axis_intervals_hours = [0,3,6,9,12,15,18,21,24]
+
+save_folder=s.graphics_directory
+save_filetype=s.graphics_filetype 
 
 #Retrieve Dictionaries
 sql_select=dictionaries.sql_select.copy()
 
 #Storing information
-save_folder=s.graphics_directory
-save_filetype=s.graphics_filetype
 
 def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     SQL=sql_select['air_temp']
-
-    times, temps = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
-    times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
     
     #Clear any pre-existing plots
     plt.clf()
     
-    #Generate new plot
-    plt.plot(times, temps)
+    #Setup plotting region
     plt.ylabel('Degrees Celcius')
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Temperature')
-    plt.savefig(save_folder + target_date +'__Air-Temp' + save_filetype)
+
+    #Get all data
+    try:
+        for plant in plant_id:
+            times, temps = get_plot_data(plantid=plant, SQL_base=SQL , input_date=target_date)
+            times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
+            #Add new plot
+            plt.plot(times, temps, label=('Plant ID: ' + str(plant)))
+    except:
+        raise Exception("Error gathering data for Air Temperature Graph")
+
+    #Publish Results
     #plt.show()
+    plt.savefig(save_folder + target_date +'__Air-Temp' + save_filetype)
 
 def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     SQL=sql_select['air_humidity']
