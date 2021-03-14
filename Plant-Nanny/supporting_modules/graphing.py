@@ -101,7 +101,7 @@ def get_plot_data(plantid, SQL_base, input_date=str(dt.date.today())):
     SQL_complete= (SQL_base % (date1, date2, plantid))
     
     #run query
-    data = db.retrieve_data(sql_query=SQL_complete)
+    data = db.query_db(sql_string=SQL_complete)
 
     #unpack data
     x=[]
