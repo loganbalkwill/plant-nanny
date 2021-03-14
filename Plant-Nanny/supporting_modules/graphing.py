@@ -46,6 +46,7 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Temperature')
+    plt.legend()
 
     #Get all data
     try:
@@ -72,6 +73,7 @@ def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Humidity')
+    plt.legend()
 
     #Get all data
     try:
