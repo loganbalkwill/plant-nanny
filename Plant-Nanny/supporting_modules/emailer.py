@@ -3,8 +3,8 @@ import smtplib
 #Email Variables
 SMTP_SERVER = 'smtp.gmail.com' #Email Server (don't change!)
 SMTP_PORT = 587 #Server Port (don't change!)
-GMAIL_USERNAME = 'plant.nanny.alerts@gmail.com' #change this to match your gmail account
-GMAIL_PASSWORD = 'Balk5610,'  #change this to match your gmail password
+GMAIL_USERNAME = 'plant.nanny.alerts@gmail.com'
+GMAIL_PASSWORD = 'Balk5610,'
  
 class Emailer:
     def sendmail(self, recipient, subject, content):
