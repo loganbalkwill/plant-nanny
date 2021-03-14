@@ -64,21 +64,28 @@ def airtemp_graph(plant_id, target_date=str(dt.date.today())):
 def airhumidity_graph(plant_id, target_date=str(dt.date.today())):
     SQL=sql_select['air_humidity']
 
-    times, humidity = get_plot_data(plantid=plant_id, SQL_base=SQL , input_date=target_date)
-    times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
-    
     #Clear any pre-existing plots
     plt.clf()
     
-    #Generate new plot
-    plt.plot(times, humidity)
+    #Setup plotting region
     plt.ylabel('Air Humidity (%)')
     plt.xlabel(target_date)
     plt.xticks(axis_intervals_hours)
     plt.suptitle('Air Humidity')
-    plt.savefig(save_folder + target_date +'__Air-Humidity' + save_filetype)
+
+    #Get all data
+    try:
+        for plant in plant_id:
+            times, humidity = get_plot_data(plantid=plant, SQL_base=SQL , input_date=target_date)
+            times=format_data(dat=times,conversion="datetime-to-timestamp_decimal")
+            #Add new plot
+            plt.plot(times, humidity, label=('Plant ID: ' + str(plant)))
+    except:
+        raise Exception("Error gathering data for Air Humidity Graph")
+
+    #Publish Results
     #plt.show()
-    
+    plt.savefig(save_folder + target_date +'__Air-Humidity' + save_filetype)
 
 def get_plot_data(plantid, SQL_base, input_date=str(dt.date.today())):
     #returns datasets x,y data for a given date, plant_id, SQL string
@@ -119,5 +126,5 @@ def format_data(dat, conversion):
 
 if __name__=='__main__':
         
-    airtemp_graph(plant_id=2)
-    airhumidity_graph(plant_id=2)
+    airtemp_graph(plant_id=[2])
+    airhumidity_graph(plant_id=[2])
