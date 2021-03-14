@@ -52,6 +52,7 @@ VERSIONING:
                                 -   Threading sensor scripts (TODO) 
                                 -   Use standard "logging" python library; depricate "logger" (TODO)
                                 -   Script to start program on launch (TODO: register script in crontab) 
+                                -   Emailer & Graphing support
 """
 
 #########################
